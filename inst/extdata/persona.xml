@@ -1,28 +1,20 @@
 
       <persona>
-        <!--Roles: TI, VI. Debe haber una persona con el rol Titular (TI) obligatoriamente. Las personas con el rol de viajero (VI) son opcionales.-->
         <rol>{rol}</rol>
         <nombre>{nombre}</nombre>
         <apellido1>{apellido1}</apellido1>
         <apellido2>{apellido2}</apellido2>
-        <!--Tipos documentos: [NIF, NIE, PAS, OTRO, CIF]-->
         <tipoDocumento>{tipoDocumento}</tipoDocumento>
         <numeroDocumento>{numeroDocumento}</numeroDocumento>
         <fechaNacimiento>{fechaNacimiento}</fechaNacimiento>
-        <!--País código ISO alfa-3: [ESP, ARG, ...]-->
         <nacionalidad>{nacionalidad}</nacionalidad>
-        <!--Sexo: [H, M, O]-->
         <sexo>{sexo}</sexo>
         <direccion>
           <direccion>{direccion}</direccion>
           <direccionComplementaria>{direccionComplementaria}</direccionComplementaria>
-          <!--Código de Municipio de 5 dígitos: [07065, 07901,...]-->
-          <!--Si el país es España (ESP), el código de municipio ha de ir informado, no así el nombre del municipio-->
           <codigoMunicipio>{codigoMunicipio}</codigoMunicipio>
-          <!--Si el país es distinto de España (ESP), ha de informar el nombre del municipio, no así el código de municipio-->
           <nombreMunicipio>{nombreMunicipio}</nombreMunicipio>
           <codigoPostal>{codigoPostal}</codigoPostal>
-          <!--País código ISO alfa-3: [ESP, ARG, ...]-->
           <pais>{pais}</pais>
         </direccion>
         <telefono>{telefono}</telefono>

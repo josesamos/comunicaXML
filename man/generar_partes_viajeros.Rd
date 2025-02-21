@@ -23,5 +23,5 @@ de salida XML que contiene datos estructurados.
 hoja_calculo <- system.file("extdata", "partes_viajeros.xlsx", package = "comunicaXML")
 archivo_xml <- tempfile(fileext = ".xml")
 
-generar_partes_viajeros(hoja_calculo, archivo_xml)
+archivo <- generar_partes_viajeros(hoja_calculo, archivo_xml)
 }
