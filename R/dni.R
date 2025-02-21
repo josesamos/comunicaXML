@@ -31,3 +31,13 @@ validate_dni <- function(dni) {
   # Compare with the provided letter
   return(letter == correct_letter)
 }
+
+
+validar_dni <- function(dni, ubicacion){
+  if (!validate_dni(dni)) {
+    stop(ubicacion, " -> El DNI '",
+         dni,
+         "' no es válido.")
+  }
+  TRUE
+}
