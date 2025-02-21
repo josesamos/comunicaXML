@@ -18,6 +18,8 @@ Suggests:
 Config/testthat/edition: 3
 RoxygenNote: 7.3.2
 Imports: 
+    readODS,
+    readxl,
     tab2xml
 URL: https://josesamos.github.io/comunicaXML/
 Depends: 

@@ -1,8 +1,8 @@
-test_that("generar_partes_viajeros works", {
+test_that("generar_xml works", {
   hoja_calculo <- system.file("extdata", "partes_viajeros.xlsx", package = "comunicaXML")
   archivo_xml <- tempfile(fileext = ".xml")
 
-  archivo <- generar_partes_viajeros(hoja_calculo, archivo_xml)
+  archivo <- generar_xml(hoja_calculo, archivo_xml)
 
   original_xml <- system.file("extdata", "partes_viajeros_generados.xml", package = "comunicaXML")
 

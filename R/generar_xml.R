@@ -23,9 +23,9 @@
 #' hoja_calculo <- system.file("extdata", "partes_viajeros.xlsx", package = "comunicaXML")
 #' archivo_xml <- tempfile(fileext = ".xml")
 #'
-#' archivo <- generar_partes_viajeros(hoja_calculo, archivo_xml)
+#' archivo <- generar_xml(hoja_calculo, archivo_xml)
 
-generar_partes_viajeros <- function(hoja_calculo, archivo_xml = NULL) {
+generar_xml <- function(hoja_calculo, archivo_xml = NULL) {
   tab2xml::sheet2xml(hoja_calculo,
                      system.file("extdata", "partes_viajeros.xml", package = "comunicaXML"),
                      archivo_xml)
