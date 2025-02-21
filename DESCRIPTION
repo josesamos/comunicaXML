@@ -20,3 +20,5 @@ RoxygenNote: 7.3.2
 Imports: 
     tab2xml
 URL: https://josesamos.github.io/comunicaXML/
+Depends: 
+    R (>= 3.5)

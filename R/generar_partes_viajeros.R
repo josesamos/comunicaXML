@@ -1,3 +1,11 @@
+.onLoad <- function(libname, pkgname) {
+  utils::data(
+    "iso_codes",
+    "municipios",
+    package = pkgname,
+    envir = parent.env(environment())
+  )
+}
 
 #' Generar partes de viajeros XML desde una hoja de cálculo
 #'
