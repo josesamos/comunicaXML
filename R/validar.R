@@ -84,6 +84,21 @@ validar_municipio <- function(codigo_municipio, ubicacion) {
   TRUE
 }
 
+validar_fecha <- function(fecha, ubicacion){
+  # Intentar convertir la fecha a tipo Date
+  fecha_convertida <- as.character(as.Date(fecha, format = "%Y-%m-%d"))
+
+  # Comprobar si la conversión fue exitosa y la fecha resultante es igual a la original
+  if (is.na(fecha_convertida) | fecha_convertida != fecha) {
+    stop(ubicacion, " -> La fecha '",
+         fecha,
+         "' no es válida, ha de ser 'aaaa-mm-dd'.")
+  }
+}
+
+validar_fecha_tarjeta <- function(fecha, ubicacion){
+}
+
 validar_establecimiento <- function(comunicacion, establecimiento) {
   validar_referencia(comunicacion, establecimiento, "establecimiento")
   df <- establecimiento
