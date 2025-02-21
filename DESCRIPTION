@@ -1,16 +1,21 @@
 Package: comunicaXML
 Type: Package
-Title: What the Package Does (Title Case)
+Title: Comunicación masiva en formato XML
 Version: 0.1.0
 Authors@R: c(
-    person(
-      "Jane", "Doe",
-      email = "jane@example.com",
-      role = c("aut", "cre")
-    )
+    person("Jose", "Samos", , "jsamos@ugr.es", role = c("aut", "cre"),
+           comment = c(ORCID = "0000-0002-4457-3439")),
+    person("Universidad de Granada", role = "cph")
   )
-Description: More about what it does (maybe more than one line).
-    Continuation lines should be indented.
-License: What license is it under?
+Description: A partir de un archivo Excel u ODS con un formato establecido, genera 
+    en formato XML las comunicaciones para realizar su alta masiva.
+License: MIT + file LICENSE
 Encoding: UTF-8
 LazyData: true
+Suggests: 
+    testthat (>= 3.0.0)
+Config/testthat/edition: 3
+RoxygenNote: 7.3.2
+Imports: 
+    tab2xml
+URL: https://josesamos.github.io/comunicaXML/

@@ -1,0 +1,18 @@
+      <contrato>
+        <referencia>{referencia}</referencia>
+        <fechaContrato>{fechaContrato}</fechaContrato>
+        <fechaEntrada>{fechaEntrada}</fechaEntrada>
+        <fechaSalida>{fechaSalida}</fechaSalida>
+        <numPersonas>{numPersonas}</numPersonas>
+        <numHabitaciones>{numHabitaciones}</numHabitaciones>
+        <internet>{internet}</internet>
+        <pago>
+          <!--Tipos de pago: [DESTI, EFECT, TARJT, PLATF, TRANS, MOVIL, TREG, OTRO]-->
+          <tipoPago>{tipoPago}</tipoPago>
+          <fechaPago>{fechaPago}</fechaPago>
+          <medioPago>{medioPago}</medioPago>
+          <titular>{titular}</titular>
+          <!--Formato mm/aaaa siendo mm un mes entre 01 y 12 y aaaa un año del 2023 en adelante-->
+          <caducidadTarjeta>{caducidadTarjeta}</caducidadTarjeta>
+        </pago>
+      </contrato>

@@ -1,0 +1,5 @@
+<ns2:peticion xmlns:ns2="http://www.neg.hospedajes.mir.es/altaReservaHospedaje">
+  <solicitud>
+    {comunicacion}
+  </solicitud>
+</ns2:peticion>
