@@ -1,6 +1,5 @@
 
 
-
 validar_hoja_calculo<- function(hoja_calculo) {
   if (!file.exists(hoja_calculo)) {
     stop("El archivo no existe: ", hoja_calculo)
