@@ -1,7 +1,7 @@
 
 test_that("validar_establecimiento detects missing foreign key", {
   comunicacion <- data.frame(comunicacion_pk = 1:3)
-  establecimiento <- data.frame(codigo = c(1, 2, 3), pais = c("ESP", "FRA", "ESP"))
+  establecimiento <- data.frame(codigo = 1:3, pais = c("ESP", "FRA", "ESP"))
 
   expect_warning(validar_establecimiento(comunicacion, establecimiento),
                  "La columna 'comunicacion_fk' no existe en la hoja 'establecimiento'.")
@@ -19,7 +19,7 @@ test_that("validar_establecimiento detects missing establishment data (less than
 
 test_that("validar_establecimiento allows valid establishments with at least 7 fields", {
   comunicacion <- data.frame(comunicacion_pk = 1:3)
-  establecimiento <- data.frame(comunicacion_fk = 1:3, codigo = c(NA, NA, NA),
+  establecimiento <- data.frame(comunicacion_fk = 1:3, codigo = c(NA, NA, NA), tipo = c('HOTEL', 'HOTEL', 'HOTEL'),
                                 pais = c("ESP", "ESP", "FRA"), codigoMunicipio = c(28079, '08019', NA),
                                 nombreMunicipio = c(NA, NA, "Paris"), extra1 = 1, extra2 = 2, extra3 = 3, extra4 = 4)
 
@@ -28,7 +28,7 @@ test_that("validar_establecimiento allows valid establishments with at least 7 f
 
 test_that("validar_establecimiento detects missing municipality code for Spain", {
   comunicacion <- data.frame(comunicacion_pk = 1:3)
-  establecimiento <- data.frame(comunicacion_fk = 1:3, codigo = c(NA, NA, NA),
+  establecimiento <- data.frame(comunicacion_fk = 1:3, codigo = c(NA, NA, NA), tipo = c('HOTEL', 'HOTEL', 'HOTEL'),
                                 pais = c("ESP", "ESP", "ESP"), codigoMunicipio = c(18003, 18003, 18003),
                                 nombreMunicipio = c(NA, "NA", NA), extra1 = 1, extra2 = 2, extra3 = 3, extra4 = 4, extra5 = 5)
 
@@ -38,7 +38,7 @@ test_that("validar_establecimiento detects missing municipality code for Spain",
 
 test_that("validar_establecimiento detects incorrect foreign municipality data", {
   comunicacion <- data.frame(comunicacion_pk = 1:3)
-  establecimiento <- data.frame(comunicacion_fk = 1:3, codigo = c(NA, NA, NA),
+  establecimiento <- data.frame(comunicacion_fk = 1:3, codigo = c(NA, NA, NA), tipo = c('HOTEL', 'HOTEL', 'HOTEL'),
                                 pais = c("FRA", "USA", "DEU"), codigoMunicipio = c(NA, NA, 18003),
                                 nombreMunicipio = c("NA", "New York", NA), extra1 = 1, extra2 = 2, extra3 = 3, extra4 = 4)
 
@@ -48,7 +48,7 @@ test_that("validar_establecimiento detects incorrect foreign municipality data",
 
 test_that("validar_establecimiento detects both code and other data present", {
   comunicacion <- data.frame(comunicacion_pk = 1:3)
-  establecimiento <- data.frame(comunicacion_fk = 1:3, codigo = c(1001, NA, NA),
+  establecimiento <- data.frame(comunicacion_fk = 1:3, codigo = c(1001, NA, NA), tipo = c('HOTEL', 'HOTEL', 'HOTEL'),
                                 pais = c("ESP", "ESP", "FRA"), codigoMunicipio = c(12345, 18003, NA),
                                 nombreMunicipio = c(NA, NA, "Paris"), extra1 = 1, extra2 = 2, extra3 = 3, extra4 = 4)
 
@@ -58,7 +58,7 @@ test_that("validar_establecimiento detects both code and other data present", {
 
 test_that("validar_establecimiento passes when all conditions are met", {
   comunicacion <- data.frame(comunicacion_pk = 1:3)
-  establecimiento <- data.frame(comunicacion_fk = 1:3, codigo = c(1001, NA, NA),
+  establecimiento <- data.frame(comunicacion_fk = 1:3, codigo = c(1001, NA, NA), tipo = c(NA, 'HOTEL', 'HOTEL'),
                                 pais = c(NA, "ESP", "FRA"), codigoMunicipio = c(NA, 18003, NA),
                                 nombreMunicipio = c(NA, NA, "Paris"), extra1 = c(NA,1,1), extra2 = c(NA,1,1), extra3 = c(NA,1,1), extra4 = c(NA,1,1))
 

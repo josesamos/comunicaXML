@@ -1,7 +1,11 @@
 .onLoad <- function(libname, pkgname) {
   utils::data(
+    "generos",
     "iso_codes",
     "municipios",
+    "tipo_documento",
+    "tipo_establecimiento",
+    "tipo_pago",
     package = pkgname,
     envir = parent.env(environment())
   )

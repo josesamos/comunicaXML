@@ -13,3 +13,35 @@
 #' @format A data frame of strings.
 #'
 "municipios"
+
+#' Tipos de pagos
+#'
+#' Códigos y descripciones de tipos de pagos.
+#'
+#' @format A data frame of strings.
+#'
+"tipo_pago"
+
+#' Tipos de establecimientos
+#'
+#' Códigos y descripciones de tipos de establecimientos.
+#'
+#' @format A data frame of strings.
+#'
+"tipo_establecimiento"
+
+#' Tipos de documentos
+#'
+#' Códigos y descripciones de tipos de documentos.
+#'
+#' @format A data frame of strings.
+#'
+"tipo_documento"
+
+#' Géneros
+#'
+#' Códigos y descripciones de géneros.
+#'
+#' @format A data frame of strings.
+#'
+"generos"

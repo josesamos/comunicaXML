@@ -31,8 +31,23 @@ validar_establecimiento <- function(comunicacion, establecimiento) {
     resto_instanciado  <- sum(!is.na(df[i, ]))
     if (is.na(df$codigo[i])) {
       if (resto_instanciado < 7) {
-        warning("Faltan datos del establecimiento en la fila ", i, ".")
+        warning(sprintf('establecimiento (fila %d)', i),
+                " -> Faltan datos.")
       } else {
+        if (length(df$tipo[i]) > 0) {
+          if (!(df$tipo[i] %in% tipo_establecimiento$codigo)) {
+            warning(
+              sprintf('establecimiento (fila %d)', i),
+              " -> El campo 'tipo' no es válido. Consulta los códigos mediante 'View(tipo_establecimiento)'.."
+            )
+          }
+        } else {
+          warning(
+            sprintf('establecimiento (fila %d)', i),
+            " -> Falta el campo 'tipo'. Consulta los códigos mediante 'View(tipo_establecimiento)'.."
+          )
+        }
+
         validar_pais(df$pais[i], sprintf('establecimiento (fila %d)', i))
         if (df$pais[i] == 'ESP') {
           validar_municipio(df$codigoMunicipio[i],
