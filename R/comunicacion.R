@@ -1,17 +1,22 @@
+#'
+#' @keywords internal
 validar_comunicacion <- function(comunicacion) {
   pk <- 'comunicacion_pk'
   if (!pk %in% names(comunicacion)) {
-    stop("La columna 'comunicacion_pk' no existe en la hoja 'comunicacion'.")
-  }
-  valores <- comunicacion[[pk]]
-  df <- comunicacion
+    warning("La columna 'comunicacion_pk' no existe en la hoja 'comunicacion'.")
+  } else {
+    valores <- comunicacion[[pk]]
+    df <- comunicacion
 
-  if (!(all(!is.na(valores)) && length(unique(valores)) == nrow(df))) {
-    stop("La columna 'comunicacion_pk' en la hoja 'comunicacion' no puede tener valores NA o duplicados.")
+    if (!(all(!is.na(valores)) && length(unique(valores)) == nrow(df))) {
+      warning("La columna 'comunicacion_pk' en la hoja 'comunicacion' no puede tener valores NA o duplicados.")
+    }
   }
   TRUE
 }
 
+#'
+#' @keywords internal
 validar_referencia <- function(comunicacion, otra, nombre) {
   pk <- 'comunicacion_pk'
   fk <- 'comunicacion_fk'

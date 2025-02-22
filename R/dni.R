@@ -32,10 +32,21 @@ validate_dni <- function(dni) {
   return(letter == correct_letter)
 }
 
-
+#' Validar y avisar de DNI español no válido
+#'
+#' Comprueba si un determinado DNI español (Documento Nacional de Identidad)
+#' es válido. Si el DNI no es válido se emite un aviso especificando la ubicación.
+#'
+#' @param dni Una cadena de caracteres que representa el DNI a validar.
+#' @param ubicacion Una cadena de caracteres que indica la ubicación o contexto en el que se
+#' se está realizando la validación. Esta información está incluida en el mensaje de advertencia.
+#'
+#' @return Siempre se devuelve `TRUE`, pero se emite un aviso si el DNI no es válido.
+#'
+#' @keywords internal
 validar_dni <- function(dni, ubicacion){
   if (!validate_dni(dni)) {
-    stop(ubicacion, " -> El DNI '",
+    warning(ubicacion, " -> El DNI '",
          dni,
          "' no es válido.")
   }
