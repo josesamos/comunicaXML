@@ -1,6 +1,8 @@
 
 validar_establecimiento <- function(comunicacion, establecimiento) {
-  validar_referencia(comunicacion, establecimiento, "establecimiento")
+
+  validate_fk(comunicacion, "comunicacion", establecimiento, "establecimiento")
+
   df <- establecimiento
 
   for (i in 1:nrow(df)) {

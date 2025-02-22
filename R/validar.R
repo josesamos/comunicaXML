@@ -23,7 +23,7 @@ validar_hoja_calculo<- function(hoja_calculo) {
   }
   names(sheets_data) <- tolower(sheet_names)
 
-  validar_comunicacion(sheets_data$comunicacion)
+  validate_pk(sheets_data$comunicacion, "comunicacion")
 
   validar_establecimiento(sheets_data$comunicacion, sheets_data$establecimiento)
 

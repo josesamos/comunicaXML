@@ -9,8 +9,7 @@ validate_pk(table, name)
 \arguments{
 \item{table}{Un data frame que representa la tabla a validar.}
 
-\item{name}{Una cadena de caracteres que indica el nombre de la tabla. La columna
-de clave principal Se espera que tenga el nombre `{name}_pk`.}
+\item{name}{Una cadena de caracteres que indica el nombre de la tabla.}
 }
 \value{
 `TRUE`. Genera advertencias si falta la columna de clave principal, contiene valores "NA",

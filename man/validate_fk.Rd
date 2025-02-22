@@ -10,12 +10,11 @@ validate_fk(table_pk, name_pk, table_fk, name_fk)
 \item{table_pk}{Un data frame que representa la tabla que contiene la clave principal.}
 
 \item{name_pk}{Una cadena de caracteres que indica el nombre de la tabla a la que se hace
-referencia. La columna de clave principal se espera que tenga el nombre `{name_pk}_pk`.}
+referencia.}
 
 \item{table_fk}{Un data frame que representa la tabla que contiene la clave externa.}
 
-\item{name_fk}{Una cadena de caracteres que indica el nombre de la tabla de referencia.
-La columna de clave externa se espera que tenga el nombre `{name_pk}_fk`.}
+\item{name_fk}{Una cadena de caracteres que indica el nombre de la tabla de referencia.}
 }
 \value{
 `TRUE`. Genera advertencias si falta la columna de clave externa en la
