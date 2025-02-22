@@ -12,6 +12,41 @@ test_that("validar_fecha() accepts valid dates", {
   expect_silent(validar_fecha("1999-12-31", "Test case"))
 })
 
+
+
+
+test_that("validar_fecha_hora reconoce fechas y horas válidas", {
+  expect_true(validar_fecha_hora("2025-02-21T15:30:45", "Test 1"))
+  expect_true(validar_fecha_hora("2000-01-01T00:00:00", "Test 2"))
+  expect_true(validar_fecha_hora("1999-12-31T23:59:59", "Test 3"))
+})
+
+test_that("validar_fecha_hora detecta formatos incorrectos", {
+  expect_warning(validar_fecha_hora("2025-02-21 15:30:45", "Test 4"),
+                 "ha de ser 'AAAA-MM-DDThh:mm:ss'")
+  expect_warning(validar_fecha_hora("2025/02/21T15:30:45", "Test 5"),
+                 "ha de ser 'AAAA-MM-DDThh:mm:ss'")
+  expect_warning(validar_fecha_hora("21-02-2025T15:30:45", "Test 6"),
+                 "ha de ser 'AAAA-MM-DDThh:mm:ss'")
+  expect_warning(validar_fecha_hora("20250221T153045", "Test 7"),
+                 "ha de ser 'AAAA-MM-DDThh:mm:ss'")
+})
+
+test_that("validar_fecha_hora detecta fechas inválidas", {
+  expect_warning(validar_fecha_hora("2025-02-30T12:00:00", "Test 8"),
+                 "no es válida")
+  expect_warning(validar_fecha_hora("2025-04-31T10:15:00", "Test 9"),
+                 "no es válida")
+  expect_warning(validar_fecha_hora("2025-02-21T25:30:45", "Test 10"),
+                 "no es válida")
+  expect_warning(validar_fecha_hora("2025-02-21T12:60:00", "Test 11"),
+                 "no es válida")
+  expect_warning(validar_fecha_hora("2025-02-21T12:30:60", "Test 12"),
+                 "no es válida")
+})
+
+
+
 test_that("validar_fecha_tarjeta() detects invalid formats", {
   expect_warning(validar_fecha_tarjeta("13/2025", "Test case"),
                  "Test case -> El mes de la fecha de caducidad de la tarjeta '13/2025' no es válido")

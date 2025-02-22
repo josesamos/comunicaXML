@@ -16,10 +16,53 @@ validar_fecha <- function(fecha, ubicacion) {
     warning(ubicacion,
             " -> La fecha '",
             fecha,
-            "' no es válida, ha de ser 'aaaa-mm-dd'.")
+            "' no es válida, ha de ser 'AAAA-MM-DD'.")
   }
   TRUE
 }
+
+
+
+#' Validar formato de fecha y hora
+#'
+#' Comprueba si una fecha y hora determinada sigue el formato 'AAAA-MM-DDThh:mm:ss'.
+#' Si el formato es incorrecto, se emite una advertencia con la ubicación proporcionada.
+#'
+#' @param fecha_hora Carácter. La cadena de fecha para validar.
+#' @param ubicacion Carácter. Una descripción de la ubicación donde se realiza la validación.
+#'
+#' @return Lógico. Siempre devuelve TRUE.
+#'
+#' @keywords internal
+validar_fecha_hora <- function(fecha_hora, ubicacion) {
+  # "AAAA-MM-DDThh:mm:ss"
+  patron <- "^\\d{4}-\\d{2}-\\d{2}T\\d{2}:\\d{2}:\\d{2}$"
+
+  if (!grepl(patron, fecha_hora)) {
+    warning(ubicacion,
+            " -> La fecha y hora '",
+            fecha_hora,
+            "' no es válida, ha de ser 'AAAA-MM-DDThh:mm:ss'.")
+  } else {
+    fecha_convertida <- as.POSIXct(fecha_hora, format = "%Y-%m-%dT%H:%M:%S", tz = "UTC")
+
+    if (!is.na(fecha_convertida)) {
+      fecha_formateada <- format(fecha_convertida, "%Y-%m-%dT%H:%M:%S")
+    } else {
+      fecha_formateada <- ""
+    }
+
+    if(fecha_hora != fecha_formateada) {
+      warning(ubicacion,
+              " -> La fecha y hora '",
+              fecha_hora,
+              "' no es válida, ha de ser 'AAAA-MM-DDThh:mm:ss'.")
+    }
+  }
+  TRUE
+}
+
+
 
 #' Validar fecha de vencimiento de la tarjeta de crédito
 #'

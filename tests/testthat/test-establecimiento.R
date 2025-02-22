@@ -14,7 +14,7 @@ test_that("validar_establecimiento detects missing establishment data (less than
                                 nombreMunicipio = c(NA), extra1 = NA, extra2 = NA)
 
   expect_warning(validar_establecimiento(comunicacion, establecimiento),
-                 "Faltan datos del establecimiento en la fila 1.")
+                 "establecimiento \\(fila 1\\) -> Faltan datos.")
 })
 
 test_that("validar_establecimiento allows valid establishments with at least 7 fields", {
