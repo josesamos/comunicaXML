@@ -20,8 +20,8 @@
       <contrato>
         <referencia>X123ABC</referencia>
         <fechaContrato>2025-02-20</fechaContrato>
-        <fechaEntrada>2025-02-21</fechaEntrada>
-        <fechaSalida>2025-02-23</fechaSalida>
+        <fechaEntrada>2025-02-21T00:00:00</fechaEntrada>
+        <fechaSalida>2025-02-23T00:00:00</fechaSalida>
         <numPersonas>2</numPersonas>
         <numHabitaciones>1</numHabitaciones>
         <internet>true</internet>
@@ -40,21 +40,23 @@
         <apellido1>Apellido11</apellido1>
         <apellido2>Apellido21</apellido2>
         <tipoDocumento>NIF</tipoDocumento>
-        <numeroDocumento>11111111D</numeroDocumento>
+        <numeroDocumento>11111111H</numeroDocumento>
+        <soporteDocumento>ABC123456</soporteDocumento>
         <fechaNacimiento>1980-01-01</fechaNacimiento>
         <nacionalidad>ESP</nacionalidad>
         <sexo>H</sexo>
         <direccion>
           <direccion>Dirección 1</direccion>
           <direccionComplementaria>Complemento 1</direccionComplementaria>
-          <codigoMunicipio>11111</codigoMunicipio>
-          <nombreMunicipio>Granada 1</nombreMunicipio>
+          <codigoMunicipio>18001</codigoMunicipio>
+          <nombreMunicipio></nombreMunicipio>
           <codigoPostal>18001</codigoPostal>
           <pais>ESP</pais>
         </direccion>
-        <telefono>11111111</telefono>
-        <telefono2>21111111</telefono2>
+        <telefono>111111111</telefono>
+        <telefono2>211111111</telefono2>
         <correo>correo1@correo.es</correo>
+        <parentesco></parentesco>
       </persona>
 
       <persona>
@@ -63,21 +65,23 @@
         <apellido1>Apellido12</apellido1>
         <apellido2>Apellido22</apellido2>
         <tipoDocumento>NIF</tipoDocumento>
-        <numeroDocumento>22222222E</numeroDocumento>
+        <numeroDocumento>22222222J</numeroDocumento>
+        <soporteDocumento>ABC123457</soporteDocumento>
         <fechaNacimiento>1980-01-02</fechaNacimiento>
         <nacionalidad>ESP</nacionalidad>
         <sexo>M</sexo>
         <direccion>
           <direccion>Dirección 2</direccion>
-          <direccionComplementaria>Complemento 2</direccionComplementaria>
-          <codigoMunicipio>22222</codigoMunicipio>
+          <direccionComplementaria></direccionComplementaria>
+          <codigoMunicipio>18002</codigoMunicipio>
           <nombreMunicipio></nombreMunicipio>
           <codigoPostal>18002</codigoPostal>
           <pais>ESP</pais>
         </direccion>
-        <telefono>22222222</telefono>
-        <telefono2>12222222</telefono2>
+        <telefono>222222222</telefono>
+        <telefono2></telefono2>
         <correo>correo2@correo.es</correo>
+        <parentesco></parentesco>
       </persona>
 
       <persona>
@@ -86,21 +90,23 @@
         <apellido1>Apellido13</apellido1>
         <apellido2>Apellido23</apellido2>
         <tipoDocumento>NIF</tipoDocumento>
-        <numeroDocumento>33333333F</numeroDocumento>
+        <numeroDocumento>33333333P</numeroDocumento>
+        <soporteDocumento>ABC123458</soporteDocumento>
         <fechaNacimiento>1980-01-03</fechaNacimiento>
         <nacionalidad>ESP</nacionalidad>
         <sexo>O</sexo>
         <direccion>
           <direccion>Dirección 3</direccion>
           <direccionComplementaria>Complemento 3</direccionComplementaria>
-          <codigoMunicipio>33333</codigoMunicipio>
-          <nombreMunicipio>Granada 3</nombreMunicipio>
+          <codigoMunicipio>18003</codigoMunicipio>
+          <nombreMunicipio></nombreMunicipio>
           <codigoPostal>18003</codigoPostal>
           <pais>ESP</pais>
         </direccion>
-        <telefono>33333333</telefono>
-        <telefono2>23333333</telefono2>
+        <telefono>333333333</telefono>
+        <telefono2>233333333</telefono2>
         <correo>correo3@correo.es</correo>
+        <parentesco></parentesco>
       </persona>
 
       <persona>
@@ -109,21 +115,23 @@
         <apellido1>Apellido14</apellido1>
         <apellido2>Apellido24</apellido2>
         <tipoDocumento>NIF</tipoDocumento>
-        <numeroDocumento>44444444G</numeroDocumento>
+        <numeroDocumento>44444444A</numeroDocumento>
+        <soporteDocumento>ABC123459</soporteDocumento>
         <fechaNacimiento>1980-01-04</fechaNacimiento>
         <nacionalidad>ESP</nacionalidad>
-        <sexo>H</sexo>
+        <sexo></sexo>
         <direccion>
           <direccion>Dirección 4</direccion>
-          <direccionComplementaria>Complemento 4</direccionComplementaria>
-          <codigoMunicipio>44444</codigoMunicipio>
+          <direccionComplementaria></direccionComplementaria>
+          <codigoMunicipio>18004</codigoMunicipio>
           <nombreMunicipio></nombreMunicipio>
           <codigoPostal>18004</codigoPostal>
           <pais>ESP</pais>
         </direccion>
-        <telefono>44444444</telefono>
-        <telefono2>24444444</telefono2>
+        <telefono>444444444</telefono>
+        <telefono2></telefono2>
         <correo>correo4@correo.es</correo>
+        <parentesco></parentesco>
       </persona>
     </comunicacion>
   </solicitud>
