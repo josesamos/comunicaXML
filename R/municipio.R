@@ -15,7 +15,7 @@
 #' @keywords internal
 validar_pais <- function(pais, ubicacion) {
   if (!(pais %in% iso_codes$alfa3)) {
-    warning(ubicacion, " -> El c\u00f3digo de país '",
+    warning(ubicacion, " -> El c\u00f3digo de pa\u00eds '",
          pais,
          "' no es v\u00e1lido. Consulta los c\u00f3digos mediante 'View(iso_codes)'.")
   }

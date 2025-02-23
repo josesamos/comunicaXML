@@ -106,7 +106,7 @@ validar_persona <- function(comunicacion, persona) {
                   " -> Falta el campo 'soporteDocumento'. Obligatorio si el tipo de documento es NIF o NIE.")
         } else if (!grepl("^[A-Za-z0-9]{9}$", df$soporteDocumento[i])) {
           warning(ubicacion,
-                  " -> El campo 'soporteDocumento' debe contener exactamente 9 caracteres alfanuméricos.")
+                  " -> El campo 'soporteDocumento' debe contener exactamente 9 caracteres alfanum\u00e9ricos.")
         }
         validar_nif_nie(df$numeroDocumento[i], ubicacion)
       }
