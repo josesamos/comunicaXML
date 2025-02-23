@@ -34,7 +34,7 @@ validar_establecimiento <- function(comunicacion, establecimiento) {
         warning(sprintf('establecimiento (fila %d)', i),
                 " -> Faltan datos.")
       } else {
-        if (length(df$tipo[i]) > 0) {
+        if (!is.na(df$tipo[i])) {
           if (!(df$tipo[i] %in% tipo_establecimiento$codigo)) {
             warning(
               sprintf('establecimiento (fila %d)', i),

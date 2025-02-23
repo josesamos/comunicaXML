@@ -28,5 +28,7 @@ validar_hoja_calculo<- function(hoja_calculo) {
   validar_establecimiento(sheets_data$comunicacion, sheets_data$establecimiento)
 
   validar_contrato(sheets_data$comunicacion, sheets_data$contrato)
+
+  validar_persona(sheets_data$comunicacion, sheets_data$persona)
 }
 

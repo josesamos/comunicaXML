@@ -9,9 +9,9 @@
           <direccion>
             <direccion>Calle del Parador</direccion>
             <direccionComplementaria>nº 3</direccionComplementaria>
-            <codigoMunicipio>11111</codigoMunicipio>
-            <nombreMunicipio>Granada</nombreMunicipio>
-            <codigoPostal>18001</codigoPostal>
+            <codigoMunicipio>18003</codigoMunicipio>
+            <nombreMunicipio></nombreMunicipio>
+            <codigoPostal>18003</codigoPostal>
             <pais>ESP</pais>
           </direccion>
         </datosEstablecimiento>
