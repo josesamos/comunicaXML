@@ -24,4 +24,5 @@ hoja_calculo <- system.file("extdata", "partes_viajeros.xlsx", package = "comuni
 archivo_xml <- tempfile(fileext = ".xml")
 
 archivo <- generar_xml(hoja_calculo, archivo_xml)
+
 }

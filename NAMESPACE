@@ -2,3 +2,4 @@
 
 export(generar_xml)
 export(obtener_hoja_calculo)
+export(validar_hoja_calculo)

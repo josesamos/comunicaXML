@@ -22,14 +22,14 @@
 #' el archivo XML tendrá el mismo nombre y ubicación que el archivo de hoja de cálculo.
 #'
 #' @return Carácter. La ruta del archivo del documento XML generado.
-#' @export
 #'
 #' @examples
 #' hoja_calculo <- system.file("extdata", "partes_viajeros.xlsx", package = "comunicaXML")
 #' archivo_xml <- tempfile(fileext = ".xml")
 #'
 #' archivo <- generar_xml(hoja_calculo, archivo_xml)
-
+#'
+#' @export
 generar_xml <- function(hoja_calculo, archivo_xml = NULL) {
   tab2xml::sheet2xml(hoja_calculo,
                      system.file("extdata", "partes_viajeros.xml", package = "comunicaXML"),

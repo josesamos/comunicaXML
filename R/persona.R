@@ -1,3 +1,26 @@
+#' Validar datos de personas en la comunicación
+#'
+#' Valida los datos de las personas asociadas a una comunicación, asegurando que
+#' los campos obligatorios estén presentes y que la información proporcionada sea consistente.
+#' Genera advertencias en caso de datos faltantes o incorrectos.
+#'
+#' @param comunicacion Data frame con los datos de la comunicación.
+#' @param persona Data frame con los datos de las personas asociadas a la comunicación.
+#'
+#' @details
+#' - Verifica que el campo `rol` solo tome los valores "TI" (Titular) o "VI" (Viajero).
+#' - Asegura que al menos una persona tenga el rol de Titular (TI).
+#' - Si hay menores de edad, al menos un adulto debe tener informado su parentesco con ellos.
+#' - Valida la presencia de campos obligatorios como `nombre`, `apellido1` y `fechaNacimiento`.
+#' - Si la persona es mayor de edad, se verifica la existencia de `tipoDocumento` y `numeroDocumento`.
+#' - Comprueba que `tipoDocumento` tenga un valor válido de `tipo_documento$codigo`.
+#' - Si el `tipoDocumento` es "NIF", el campo `apellido2` es obligatorio.
+#' - Si el `tipoDocumento` es "NIF" o "NIE", el campo `soporteDocumento` debe existir y tener 9 caracteres alfanuméricos.
+#' - Valida que `sexo`, `nacionalidad` y `parentesco` contengan valores válidos según las tablas de códigos.
+#' - Se debe proporcionar al menos un dato de contacto: `telefono`, `telefono2` o `correo`.
+#' - Se realizan validaciones sobre dirección, teléfono, email y documento de identidad.
+#'
+#' @return `TRUE` si todas las validaciones se completan sin problemas, de lo contrario, emite advertencias (`warning`).
 #'
 #' @keywords internal
 validar_persona <- function(comunicacion, persona) {
@@ -11,14 +34,26 @@ validar_persona <- function(comunicacion, persona) {
       warning("El campo 'rol' solo puede tomar los valores 'TI' o 'VI'.")
     }
     titulares <- sum(bloque == "TI")
-    if (titulares == 0) {
+    if (is.na(titulares) || titulares == 0) {
       warning("Debe haber una persona con el rol Titular (TI) obligatoriamente. Las personas con el rol de viajero (VI) son opcionales.")
     }
 
     fnac_parent <- persona[persona$comunicacion_fk == k, c('fechaNacimiento', 'parentesco')]
-    menores <- fnac_parent[!es_mayor_de_edad(fnac_parent$fechaNacimiento), 'fechaNacimiento'][[1]]
-    def_parentesco <- fnac_parent[es_mayor_de_edad(fnac_parent$fechaNacimiento), 'parentesco'][[1]]
-    def_parentesco <- def_parentesco[!is.na(def_parentesco)]
+    menores <- fnac_parent[!es_mayor_de_edad(fnac_parent$fechaNacimiento), "fechaNacimiento"]
+    if (!is.null(menores) && is.data.frame(menores) && nrow(menores) > 0) {
+      menores <- menores[[1]]
+    } else {
+      menores <- character(0)
+    }
+
+    def_parentesco <- fnac_parent[es_mayor_de_edad(fnac_parent$fechaNacimiento), 'parentesco']
+    if (!is.null(def_parentesco) && is.data.frame(def_parentesco) && nrow(def_parentesco) > 0) {
+      def_parentesco <- def_parentesco[[1]]
+      def_parentesco <- def_parentesco[!is.na(def_parentesco)]
+      def_parentesco <- def_parentesco[def_parentesco != '']
+    } else {
+      def_parentesco <- character(0)
+    }
     if (length(menores) > 0 && length(def_parentesco) == 0) {
       warning("Si alguna de las personas es menor de edad, al menos una de las personas mayores de edad ha de tener informada su relación de parentesco con esta persona.")
     }
