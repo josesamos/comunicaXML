@@ -15,7 +15,7 @@ validar_telefono <- function(telefono, ubicacion) {
   if (!grepl("^[0-9]{9}$", telefono)) {
     warning(ubicacion, " -> El teléfono '",
             telefono,
-            "' no es válido. Ha de ser 9 números sin espacios.")
+            "' no es v\u00e1lido. Ha de ser 9 números sin espacios.")
   }
   TRUE
 }

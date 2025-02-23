@@ -16,7 +16,7 @@ validar_fecha <- function(fecha, ubicacion) {
     warning(ubicacion,
             " -> La fecha '",
             fecha,
-            "' no es válida, ha de ser 'AAAA-MM-DD'.")
+            "' no es v\u00e1lida, ha de ser 'AAAA-MM-DD'.")
   }
   TRUE
 }
@@ -42,7 +42,7 @@ validar_fecha_hora <- function(fecha_hora, ubicacion) {
     warning(ubicacion,
             " -> La fecha y hora '",
             fecha_hora,
-            "' no es válida, ha de ser 'AAAA-MM-DDThh:mm:ss'.")
+            "' no es v\u00e1lida, ha de ser 'AAAA-MM-DDThh:mm:ss'.")
   } else {
     fecha_convertida <- as.POSIXct(fecha_hora, format = "%Y-%m-%dT%H:%M:%S", tz = "UTC")
 
@@ -56,7 +56,7 @@ validar_fecha_hora <- function(fecha_hora, ubicacion) {
       warning(ubicacion,
               " -> La fecha y hora '",
               fecha_hora,
-              "' no es válida, ha de ser 'AAAA-MM-DDThh:mm:ss'.")
+              "' no es v\u00e1lida, ha de ser 'AAAA-MM-DDThh:mm:ss'.")
     }
   }
   TRUE
@@ -84,7 +84,7 @@ validar_fecha_tarjeta <- function(fecha, ubicacion){
   if (!grepl(patron, fecha)) {
     warning(ubicacion, " -> La fecha de caducidad de la tarjeta '",
          fecha,
-         "' no es válida, ha de ser 'mm/aaaa'.")
+         "' no es v\u00e1lida, ha de ser 'mm/aaaa'.")
   } else {
     partes <- unlist(strsplit(fecha, "/"))
     mes <- as.numeric(partes[1])
@@ -93,7 +93,7 @@ validar_fecha_tarjeta <- function(fecha, ubicacion){
     if (mes < 1 || mes > 12) {
       warning(ubicacion, " -> El mes de la fecha de caducidad de la tarjeta '",
            fecha,
-           "' no es válido.")
+           "' no es v\u00e1lido.")
     } else {
       fecha_actual <- Sys.Date()
       mes_actual <- as.numeric(format(fecha_actual, "%m"))
@@ -102,7 +102,7 @@ validar_fecha_tarjeta <- function(fecha, ubicacion){
       if (anio < anio_actual || (anio == anio_actual && mes < mes_actual)) {
         warning(ubicacion, " -> La tarjeta de fecha '",
              fecha,
-             "' está vencida.")
+             "' est\u00e1 vencida.")
       }
     }
   }

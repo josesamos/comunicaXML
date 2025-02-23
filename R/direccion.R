@@ -39,7 +39,7 @@ validar_direccion <- function(direccion, ubicacion) {
       if (is.na(df$codigoMunicipio) || (!is.na(df$nombreMunicipio))) {
         warning(
           ubicacion,
-          " -> Si el país es España (ESP), el código de municipio ha de ir informado, no así el nombre del municipio."
+          " -> Si el pa\u00eds es Espa\u00f1a (ESP), el c\u00f3digo de municipio ha de ir informado, no as\u00ed el nombre del municipio."
         )
       } else {
         validar_municipio(df$codigoMunicipio, ubicacion)
@@ -48,7 +48,7 @@ validar_direccion <- function(direccion, ubicacion) {
       if ((!is.na(df$codigoMunicipio)) || is.na(df$nombreMunicipio)) {
         warning(
           ubicacion,
-          " -> Si el país es distinto de España (ESP), ha de informar el nombre del municipio, no así el código de municipio."
+          " -> Si el pa\u00eds es distinto de Espa\u00f1a (ESP), ha de informar el nombre del municipio, no as\u00ed el c\u00f3digo de municipio."
         )
       }
     }
@@ -59,9 +59,9 @@ validar_direccion <- function(direccion, ubicacion) {
   } else if (!is.na(df$pais)) {
     if (df$pais == 'ESP') {
       if (!validar_codigo_postal(df$codigoPostal)) {
-        warning(ubicacion, " -> El código postal '",
+        warning(ubicacion, " -> El c\u00f3digo postal '",
                 df$codigoMunicipio,
-                "' no es válido.")
+                "' no es v\u00e1lido.")
       }
     }
   }

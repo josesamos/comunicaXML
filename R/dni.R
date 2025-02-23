@@ -75,7 +75,7 @@ validar_nif_nie <- function(dni, ubicacion){
   if (!(validate_nif(dni) || validate_nie(dni))) {
     warning(ubicacion, " -> El NIF/NIE '",
          dni,
-         "' no es válido.")
+         "' no es v\u00e1lido.")
   }
   TRUE
 }

@@ -12,9 +12,9 @@ validar_email <- function(email, ubicacion) {
   patron <- "^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\\.[a-zA-Z]{2,}$"
 
   if (!grepl(patron, email)) {
-    warning(ubicacion, " -> La dirección de correo electrónico '",
+    warning(ubicacion, " -> La direcci\u00f3n de correo electr\u00f3nico '",
             email,
-            "' no es válida.")
+            "' no es v\u00e1lida.")
   }
   TRUE
 }

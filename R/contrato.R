@@ -34,7 +34,7 @@ validar_contrato <- function(comunicacion, contrato) {
     ubicacion <- sprintf('contrato (fila %d)', i)
     if (is.na(df$referencia[i])) {
       warning(ubicacion,
-              " -> Falta el número de referencia del contrato.")
+              " -> Falta el n\u00famero de referencia del contrato.")
     }
     if (is.na(df$fechaContrato[i])) {
       warning(ubicacion,
@@ -64,14 +64,14 @@ validar_contrato <- function(comunicacion, contrato) {
     if (!grepl("^[1-9][0-9]*$", df$numPersonas[i])) {
       warning(
         ubicacion,
-        " -> El número de personas ha de ser un número entero mayor que 0."
+        " -> El n\u00famero de personas ha de ser un n\u00famero entero mayor que 0."
       )
     }
     if (!is.na(df$numHabitaciones[i])) {
       if (!grepl("^[1-9][0-9]*$", df$numHabitaciones[i])) {
         warning(
           ubicacion,
-          " -> El número de habitaciones ha de ser un número entero mayor que 0."
+          " -> El n\u00famero de habitaciones ha de ser un n\u00famero entero mayor que 0."
         )
       }
     }
@@ -86,7 +86,7 @@ validar_contrato <- function(comunicacion, contrato) {
     if (!(df$tipoPago[i] %in% tipo_pago$codigo)) {
       warning(
         ubicacion,
-        " -> El campo 'tipoPago' no es válido. Consulta los códigos mediante 'View(tipo_pago)'.."
+        " -> El campo 'tipoPago' no es v\u00e1lido. Consulta los c\u00f3digos mediante 'View(tipo_pago)'.."
       )
     }
     if (!is.na(df$fechaPago[i])) {

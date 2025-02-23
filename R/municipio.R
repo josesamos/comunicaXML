@@ -15,9 +15,9 @@
 #' @keywords internal
 validar_pais <- function(pais, ubicacion) {
   if (!(pais %in% iso_codes$alfa3)) {
-    warning(ubicacion, " -> El código de país '",
+    warning(ubicacion, " -> El c\u00f3digo de país '",
          pais,
-         "' no es válido. Consulta los códigos mediante 'View(iso_codes)'.")
+         "' no es v\u00e1lido. Consulta los c\u00f3digos mediante 'View(iso_codes)'.")
   }
   TRUE
 }
@@ -42,7 +42,7 @@ validar_municipio <- function(codigo_municipio, ubicacion) {
   if (!(codigo_municipio %in% municipios$codigo)) {
     warning(ubicacion, " -> El código de municipio '",
          codigo_municipio,
-         "' no es válido. Consulta los códigos mediante 'View(municipios)'.")
+         "' no es v\u00e1lido. Consulta los c\u00f3digos mediante 'View(municipios)'.")
   }
   TRUE
 }

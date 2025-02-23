@@ -33,13 +33,13 @@ validar_establecimiento <- function(comunicacion, establecimiento) {
     if (is.na(df$codigo[i])) {
       if (is.na(df$tipo)) {
         warning(ubicacion,
-                " -> Falta el campo 'tipo'. Consulta los códigos mediante 'View(tipo_establecimiento)'."
+                " -> Falta el campo 'tipo'. Consulta los c\u00f3digos mediante 'View(tipo_establecimiento)'."
         )
       } else {
         if (!(df$tipo[i] %in% tipo_establecimiento$codigo)) {
           warning(
             ubicacion,
-            " -> El campo 'tipo' no es válido. Consulta los códigos mediante 'View(tipo_establecimiento)'."
+            " -> El campo 'tipo' no es v\u00e1lido. Consulta los c\u00f3digos mediante 'View(tipo_establecimiento)'."
           )
         }
       }
@@ -53,7 +53,7 @@ validar_establecimiento <- function(comunicacion, establecimiento) {
       if (resto_instanciado > 2) {
         warning(
           ubicacion,
-          " -> Ha de indicar los datos del establecimiento o bien el código de establecimiento."
+          " -> Ha de indicar los datos del establecimiento o bien el c\u00f3digo de establecimiento."
         )
       }
     }

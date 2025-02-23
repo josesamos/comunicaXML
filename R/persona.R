@@ -55,7 +55,7 @@ validar_persona <- function(comunicacion, persona) {
       def_parentesco <- character(0)
     }
     if (length(menores) > 0 && length(def_parentesco) == 0) {
-      warning("Si alguna de las personas es menor de edad, al menos una de las personas mayores de edad ha de tener informada su relación de parentesco con esta persona.")
+      warning("Si alguna de las personas es menor de edad, al menos una de las personas mayores de edad ha de tener informada su relaci\u00f3n de parentesco con esta persona.")
     }
   }
 
@@ -81,7 +81,7 @@ validar_persona <- function(comunicacion, persona) {
       if (es_mayor_de_edad(df$fechaNacimiento[i])) {
         if (is.na(df$tipoDocumento[i])) {
           warning(ubicacion,
-                  " -> Falta el campo 'tipo_documento'. Consulta los códigos mediante 'View(tipo_documento)'.")
+                  " -> Falta el campo 'tipo_documento'. Consulta los c\u00f3digos mediante 'View(tipo_documento)'.")
         }
         if (is.na(df$numeroDocumento[i])) {
           warning(ubicacion,
@@ -92,7 +92,7 @@ validar_persona <- function(comunicacion, persona) {
     if (!is.na(df$tipoDocumento[i])) {
       if (!(df$tipoDocumento[i] %in% tipo_documento$codigo)) {
         warning(ubicacion,
-                " -> El campo 'tipo_documento' no es válido. Consulta los códigos mediante 'View(tipo_documento)'.")
+                " -> El campo 'tipo_documento' no es v\u00e1lido. Consulta los c\u00f3digos mediante 'View(tipo_documento)'.")
       }
       if (df$tipoDocumento[i] == 'NIF') {
         if (is.na(df$apellido2[i])) {
@@ -117,7 +117,7 @@ validar_persona <- function(comunicacion, persona) {
     if (!is.na(df$sexo[i])) {
       if (!(df$sexo[i] %in% generos$codigo)) {
         warning(ubicacion,
-                " -> El campo 'sexo' no es válido. Consulta los códigos mediante 'View(generos)'.")
+                " -> El campo 'sexo' no es v\u00e1lido. Consulta los c\u00f3digos mediante 'View(generos)'.")
       }
     }
     if (is.na(df$telefono[i]) && is.na(df$telefono2[i]) && is.na(df$correo[i])) {
@@ -137,7 +137,7 @@ validar_persona <- function(comunicacion, persona) {
     if (!is.na(df$parentesco[i])) {
       if (!(df$parentesco[i] %in% parentesco$codigo)) {
         warning(ubicacion,
-                " -> El campo 'parentesco' no es válido. Consulta los códigos mediante 'View(parentesco)'.")
+                " -> El campo 'parentesco' no es v\u00e1lido. Consulta los c\u00f3digos mediante 'View(parentesco)'.")
       }
     }
 
