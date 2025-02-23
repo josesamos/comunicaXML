@@ -46,3 +46,30 @@ validar_municipio <- function(codigo_municipio, ubicacion) {
   }
   TRUE
 }
+
+
+#' Validate a Spanish Postal Code
+#'
+#' Checks if a given postal code is valid in Spain. It must be a 5-digit numeric string
+#' where the first two digits correspond to valid Spanish provinces (01 to 52).
+#'
+#' @param codigo_postal A character string representing the postal code to validate.
+#' @return `TRUE` if the postal code is valid, `FALSE` otherwise.
+#'
+#' @keywords internal
+validar_codigo_postal <- function(codigo_postal) {
+  # Ensure it is a character string of exactly 5 digits
+  if (!grepl("^[0-9]{5}$", codigo_postal)) {
+    return(FALSE)
+  }
+
+  # Extract the first two digits (province code)
+  provincia <- as.numeric(substr(codigo_postal, 1, 2))
+
+  # Valid province codes in Spain (from 01 to 52)
+  if (provincia < 1 || provincia > 52) {
+    return(FALSE)
+  }
+
+  TRUE
+}

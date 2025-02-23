@@ -1,66 +1,65 @@
 
-test_that("validar_establecimiento detects missing foreign key", {
-  comunicacion <- data.frame(comunicacion_pk = 1:3)
-  establecimiento <- data.frame(codigo = 1:3, pais = c("ESP", "FRA", "ESP"))
+test_that("validar_establecimiento maneja correctamente los diferentes casos", {
 
-  expect_warning(validar_establecimiento(comunicacion, establecimiento),
-                 "La columna 'comunicacion_fk' no existe en la hoja 'establecimiento'.")
-})
+  # Datos de comunicación válidos
+  comunicacion <- data.frame(comunicacion_pk = c(1, 2, 3))
 
-test_that("validar_establecimiento detects missing establishment data (less than 7 fields)", {
-  comunicacion <- data.frame(comunicacion_pk = 1:3)
-  establecimiento <- data.frame(comunicacion_fk = 1, codigo = c(NA),
-                                pais = c(NA), codigoMunicipio = c(NA),
-                                nombreMunicipio = c(NA), extra1 = NA, extra2 = NA)
+  # Caso 1: Establecimiento con código válido (debe pasar sin warnings)
+  establecimiento_valido <- data.frame(
+    comunicacion_fk = 1,
+    codigo = c("EST001"),
+    tipo = NA,
+    nombre = NA,
+    pais = NA,
+    codigoMunicipio = NA,
+    nombreMunicipio = NA,
+    codigoPostal = NA,
+    direccion = NA
+  )
+  expect_silent(validar_establecimiento(comunicacion, establecimiento_valido))
 
-  expect_warning(validar_establecimiento(comunicacion, establecimiento),
-                 "establecimiento \\(fila 1\\) -> Faltan datos.")
-})
+  # Caso 2: Establecimiento sin código, pero con tipo y nombre válidos
+  establecimiento_con_datos <- data.frame(
+    comunicacion_fk = 1,
+    codigo = NA,
+    tipo = "HOTEL",
+    nombre = "Hotel Ejemplo",
+    pais = "ESP",
+    codigoMunicipio = 28079,
+    nombreMunicipio = NA,
+    codigoPostal = "28001",
+    direccion = "Calle Ejemplo, 123"
+  )
+  expect_silent(validar_establecimiento(comunicacion, establecimiento_con_datos))
 
-test_that("validar_establecimiento allows valid establishments with at least 7 fields", {
-  comunicacion <- data.frame(comunicacion_pk = 1:3)
-  establecimiento <- data.frame(comunicacion_fk = 1:3, codigo = c(NA, NA, NA), tipo = c('HOTEL', 'HOTEL', 'HOTEL'),
-                                pais = c("ESP", "ESP", "FRA"), codigoMunicipio = c(28079, '08019', NA),
-                                nombreMunicipio = c(NA, NA, "Paris"), extra1 = 1, extra2 = 2, extra3 = 3, extra4 = 4)
+  # Caso 3: Falta el campo 'tipo'
+  establecimiento_sin_tipo <- establecimiento_con_datos
+  establecimiento_sin_tipo$tipo <- NA
+  expect_warning(validar_establecimiento(comunicacion, establecimiento_sin_tipo),
+                 "Falta el campo 'tipo'")
 
-  expect_silent(validar_establecimiento(comunicacion, establecimiento))
-})
+  # Caso 4: Tipo de establecimiento no válido
+  establecimiento_tipo_invalido <- establecimiento_con_datos
+  establecimiento_tipo_invalido$tipo <- "TIPO_INVALIDO"
+  expect_warning(validar_establecimiento(comunicacion, establecimiento_tipo_invalido),
+                 "El campo 'tipo' no es válido")
 
-test_that("validar_establecimiento detects missing municipality code for Spain", {
-  comunicacion <- data.frame(comunicacion_pk = 1:3)
-  establecimiento <- data.frame(comunicacion_fk = 1:3, codigo = c(NA, NA, NA), tipo = c('HOTEL', 'HOTEL', 'HOTEL'),
-                                pais = c("ESP", "ESP", "ESP"), codigoMunicipio = c(18003, 18003, 18003),
-                                nombreMunicipio = c(NA, "NA", NA), extra1 = 1, extra2 = 2, extra3 = 3, extra4 = 4, extra5 = 5)
+  # Caso 5: Falta el campo 'nombre'
+  establecimiento_sin_nombre <- establecimiento_con_datos
+  establecimiento_sin_nombre$nombre <- NA
+  expect_warning(validar_establecimiento(comunicacion, establecimiento_sin_nombre),
+                 "Falta el campo 'nombre'")
 
-  expect_warning(validar_establecimiento(comunicacion, establecimiento),
-                 "establecimiento \\(fila 2\\) -> Si el país es España \\(ESP\\), el código de municipio ha de ir informado, no así el nombre del municipio.")
-})
+  # Caso 6: Dirección incompleta
+  establecimiento_direccion_incompleta <- establecimiento_con_datos
+  establecimiento_direccion_incompleta$codigoPostal <- NA
+  expect_warning(validar_establecimiento(comunicacion, establecimiento_direccion_incompleta),
+                 "Falta el campo 'codigoPostal'")
 
-test_that("validar_establecimiento detects incorrect foreign municipality data", {
-  comunicacion <- data.frame(comunicacion_pk = 1:3)
-  establecimiento <- data.frame(comunicacion_fk = 1:3, codigo = c(NA, NA, NA), tipo = c('HOTEL', 'HOTEL', 'HOTEL'),
-                                pais = c("FRA", "USA", "DEU"), codigoMunicipio = c(NA, NA, 18003),
-                                nombreMunicipio = c("NA", "New York", NA), extra1 = 1, extra2 = 2, extra3 = 3, extra4 = 4)
+  # Caso 7: Código de establecimiento informado junto con otros datos (error)
+  establecimiento_con_codigo_y_datos <- establecimiento_con_datos
+  establecimiento_con_codigo_y_datos$codigo <- "EST001"
+  expect_warning(validar_establecimiento(comunicacion, establecimiento_con_codigo_y_datos),
+                 "Ha de indicar los datos del establecimiento o bien el código de establecimiento.")
 
-  expect_warning(validar_establecimiento(comunicacion, establecimiento),
-                 "establecimiento \\(fila 3\\) -> Si el país es distinto de España \\(ESP\\), ha de informar el nombre del municipio, no así el código de municipio.")
-})
-
-test_that("validar_establecimiento detects both code and other data present", {
-  comunicacion <- data.frame(comunicacion_pk = 1:3)
-  establecimiento <- data.frame(comunicacion_fk = 1:3, codigo = c(1001, NA, NA), tipo = c('HOTEL', 'HOTEL', 'HOTEL'),
-                                pais = c("ESP", "ESP", "FRA"), codigoMunicipio = c(12345, 18003, NA),
-                                nombreMunicipio = c(NA, NA, "Paris"), extra1 = 1, extra2 = 2, extra3 = 3, extra4 = 4)
-
-  expect_warning(validar_establecimiento(comunicacion, establecimiento),
-                 "establecimiento \\(fila 1\\) -> Ha de indicar los datos del establecimiento o bien el código de establecimiento.")
-})
-
-test_that("validar_establecimiento passes when all conditions are met", {
-  comunicacion <- data.frame(comunicacion_pk = 1:3)
-  establecimiento <- data.frame(comunicacion_fk = 1:3, codigo = c(1001, NA, NA), tipo = c(NA, 'HOTEL', 'HOTEL'),
-                                pais = c(NA, "ESP", "FRA"), codigoMunicipio = c(NA, 18003, NA),
-                                nombreMunicipio = c(NA, NA, "Paris"), extra1 = c(NA,1,1), extra2 = c(NA,1,1), extra3 = c(NA,1,1), extra4 = c(NA,1,1))
-
-  expect_silent(validar_establecimiento(comunicacion, establecimiento))
 })

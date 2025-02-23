@@ -3,6 +3,7 @@
     "generos",
     "iso_codes",
     "municipios",
+    "parentesco",
     "tipo_documento",
     "tipo_establecimiento",
     "tipo_pago",

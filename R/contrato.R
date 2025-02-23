@@ -31,45 +31,46 @@ validar_contrato <- function(comunicacion, contrato) {
   df <- contrato
 
   for (i in 1:nrow(df)) {
+    ubicacion <- sprintf('contrato (fila %d)', i)
     if (is.na(df$referencia[i])) {
-      warning(sprintf('contrato (fila %d)', i),
+      warning(ubicacion,
               " -> Falta el número de referencia del contrato.")
     }
     if (is.na(df$fechaContrato[i])) {
-      warning(sprintf('contrato (fila %d)', i),
+      warning(ubicacion,
               " -> Falta la fecha del contrato.")
     } else {
-      validar_fecha(df$fechaContrato[i], sprintf('contrato (fila %d)', i))
+      validar_fecha(df$fechaContrato[i], ubicacion)
     }
     if (is.na(df$fechaEntrada[i])) {
-      warning(sprintf('contrato (fila %d)', i),
+      warning(ubicacion,
               " -> Falta la fecha de entrada.")
     } else {
-      validar_fecha_hora(df$fechaEntrada[i], sprintf('contrato (fila %d)', i))
+      validar_fecha_hora(df$fechaEntrada[i], ubicacion)
     }
     if (is.na(df$fechaSalida[i])) {
-      warning(sprintf('contrato (fila %d)', i),
+      warning(ubicacion,
               " -> Falta la fecha de salida.")
     } else {
-      validar_fecha_hora(df$fechaSalida[i], sprintf('contrato (fila %d)', i))
+      validar_fecha_hora(df$fechaSalida[i], ubicacion)
     }
 
     if (df$fechaEntrada[i] >= df$fechaSalida[i]) {
       warning(
-        sprintf('contrato (fila %d)', i),
+        ubicacion,
         " -> La fecha de salida ha de ser posterior a la fecha de entrada."
       )
     }
     if (!grepl("^[1-9][0-9]*$", df$numPersonas[i])) {
       warning(
-        sprintf('contrato (fila %d)', i),
+        ubicacion,
         " -> El número de personas ha de ser un número entero mayor que 0."
       )
     }
     if (!is.na(df$numHabitaciones[i])) {
       if (!grepl("^[1-9][0-9]*$", df$numHabitaciones[i])) {
         warning(
-          sprintf('contrato (fila %d)', i),
+          ubicacion,
           " -> El número de habitaciones ha de ser un número entero mayor que 0."
         )
       }
@@ -77,22 +78,22 @@ validar_contrato <- function(comunicacion, contrato) {
     if (!is.na(df$internet[i])) {
       if (!(df$internet[i] %in% c("true", "false"))) {
         warning(
-          sprintf('contrato (fila %d)', i),
+          ubicacion,
           " -> El campo 'internet' solo puede tomar los valores 'true' o 'false'."
         )
       }
     }
     if (!(df$tipoPago[i] %in% tipo_pago$codigo)) {
       warning(
-        sprintf('contrato (fila %d)', i),
+        ubicacion,
         " -> El campo 'tipoPago' no es válido. Consulta los códigos mediante 'View(tipo_pago)'.."
       )
     }
     if (!is.na(df$fechaPago[i])) {
-      validar_fecha(df$fechaPago[i], sprintf('contrato (fila %d)', i))
+      validar_fecha(df$fechaPago[i], ubicacion)
     }
     if (!is.na(df$caducidadTarjeta[i])) {
-      validar_fecha_tarjeta(df$caducidadTarjeta[i], sprintf('contrato (fila %d)', i))
+      validar_fecha_tarjeta(df$caducidadTarjeta[i], ubicacion)
     }
   }
   TRUE

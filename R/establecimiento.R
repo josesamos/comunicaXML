@@ -28,50 +28,31 @@ validar_establecimiento <- function(comunicacion, establecimiento) {
   df <- establecimiento
 
   for (i in 1:nrow(df)) {
+    ubicacion <- sprintf('establecimiento (fila %d)', i)
     resto_instanciado  <- sum(!is.na(df[i, ]))
     if (is.na(df$codigo[i])) {
-      if (resto_instanciado < 7) {
-        warning(sprintf('establecimiento (fila %d)', i),
-                " -> Faltan datos.")
+      if (is.na(df$tipo)) {
+        warning(ubicacion,
+                " -> Falta el campo 'tipo'. Consulta los códigos mediante 'View(tipo_establecimiento)'."
+        )
       } else {
-        if (!is.na(df$tipo[i])) {
-          if (!(df$tipo[i] %in% tipo_establecimiento$codigo)) {
-            warning(
-              sprintf('establecimiento (fila %d)', i),
-              " -> El campo 'tipo' no es válido. Consulta los códigos mediante 'View(tipo_establecimiento)'."
-            )
-          }
-        } else {
+        if (!(df$tipo[i] %in% tipo_establecimiento$codigo)) {
           warning(
-            sprintf('establecimiento (fila %d)', i),
-            " -> Falta el campo 'tipo'. Consulta los códigos mediante 'View(tipo_establecimiento)'."
+            ubicacion,
+            " -> El campo 'tipo' no es válido. Consulta los códigos mediante 'View(tipo_establecimiento)'."
           )
         }
-
-        validar_pais(df$pais[i], sprintf('establecimiento (fila %d)', i))
-        if (df$pais[i] == 'ESP') {
-          validar_municipio(df$codigoMunicipio[i],
-                            sprintf('establecimiento (fila %d)', i))
-          if (!is.na(df$nombreMunicipio[i])) {
-            warning(
-              sprintf('establecimiento (fila %d)', i),
-              " -> Si el país es España (ESP), el código de municipio ha de ir informado, no así el nombre del municipio."
-            )
-          }
-        } else {
-          if ((!is.na(df$codigoMunicipio[i])) ||
-              is.na(df$nombreMunicipio[i])) {
-            warning(
-              sprintf('establecimiento (fila %d)', i),
-              " -> Si el país es distinto de España (ESP), ha de informar el nombre del municipio, no así el código de municipio."
-            )
-          }
-        }
       }
+      if (is.na(df$nombre)) {
+        warning(ubicacion,
+                " -> Falta el campo 'nombre'."
+        )
+      }
+      validar_direccion(df[i, ], ubicacion)
     } else {
       if (resto_instanciado > 2) {
         warning(
-          sprintf('establecimiento (fila %d)', i),
+          ubicacion,
           " -> Ha de indicar los datos del establecimiento o bien el código de establecimiento."
         )
       }
