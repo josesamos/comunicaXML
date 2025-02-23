@@ -1,9 +1,13 @@
 
 <!-- README.md is generated from README.Rmd. Please edit that file -->
 
-# comunicaXML
+# comunicaXML: Comunicación masiva en formato XML <a href="https://josesamos.github.io/comunicaXML/"><img src="man/figures/logo.png" align="right" height="139" alt="comunicaXML website" /></a>
 
 <!-- badges: start -->
+
+[![R-CMD-check](https://github.com/josesamos/comunicaXML/actions/workflows/R-CMD-check.yaml/badge.svg)](https://github.com/josesamos/comunicaXML/actions/workflows/R-CMD-check.yaml)
+[![Codecov test
+coverage](https://codecov.io/gh/josesamos/comunicaXML/graph/badge.svg)](https://app.codecov.io/gh/josesamos/comunicaXML)
 <!-- badges: end -->
 
 The goal of comunicaXML is to …
