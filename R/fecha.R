@@ -108,3 +108,22 @@ validar_fecha_tarjeta <- function(fecha, ubicacion){
   }
   TRUE
 }
+
+
+#' Verifica si una persona es mayor de edad
+#'
+#' Esta función determina si una persona es mayor de 18 años a partir de su fecha de nacimiento.
+#'
+#' @param fecha_nacimiento Una cadena de texto con la fecha de nacimiento en formato "AAAA-MM-DD".
+#' @return `TRUE` si la persona tiene 18 años o más, `FALSE` en caso contrario.
+#'
+#' @keywords internal
+es_mayor_de_edad <- function(fecha_nacimiento) {
+  fecha_nacimiento <- as.Date(fecha_nacimiento)
+
+  fecha_actual <- Sys.Date()
+
+  edad <- as.numeric(difftime(fecha_actual, fecha_nacimiento, units = "days")) %/% 365
+
+  return(edad >= 18)
+}

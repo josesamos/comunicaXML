@@ -69,3 +69,18 @@ test_that("validar_fecha_tarjeta() accepts valid dates", {
   expect_silent(validar_fecha_tarjeta(fecha_valida, "Test case"))
   expect_silent(validar_fecha_tarjeta("12/2030", "Test case"))
 })
+
+
+test_that("Verifica si una persona es mayor de edad", {
+  expect_true(es_mayor_de_edad("2000-01-01"))  # Persona mayor de 18 años
+  expect_false(es_mayor_de_edad("2010-05-15")) # Persona menor de 18 años
+})
+
+test_that("Maneja correctamente fechas límite", {
+  fecha_hoy <- as.character(Sys.Date() - (18 * 365)) # Justo 18 años atrás
+  expect_true(es_mayor_de_edad(fecha_hoy))  # Justo 18 años debería ser TRUE
+
+  fecha_un_dia_despues <- as.character(Sys.Date() - (18 * 365) + 1)
+  expect_false(es_mayor_de_edad(fecha_un_dia_despues))  # Un día menos de 18 años debería ser FALSE
+})
+

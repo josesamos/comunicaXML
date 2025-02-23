@@ -6,6 +6,7 @@
         <apellido2>{apellido2}</apellido2>
         <tipoDocumento>{tipoDocumento}</tipoDocumento>
         <numeroDocumento>{numeroDocumento}</numeroDocumento>
+        <soporteDocumento>{soporteDocumento}</soporteDocumento>
         <fechaNacimiento>{fechaNacimiento}</fechaNacimiento>
         <nacionalidad>{nacionalidad}</nacionalidad>
         <sexo>{sexo}</sexo>

@@ -38,13 +38,13 @@ validar_establecimiento <- function(comunicacion, establecimiento) {
           if (!(df$tipo[i] %in% tipo_establecimiento$codigo)) {
             warning(
               sprintf('establecimiento (fila %d)', i),
-              " -> El campo 'tipo' no es válido. Consulta los códigos mediante 'View(tipo_establecimiento)'.."
+              " -> El campo 'tipo' no es válido. Consulta los códigos mediante 'View(tipo_establecimiento)'."
             )
           }
         } else {
           warning(
             sprintf('establecimiento (fila %d)', i),
-            " -> Falta el campo 'tipo'. Consulta los códigos mediante 'View(tipo_establecimiento)'.."
+            " -> Falta el campo 'tipo'. Consulta los códigos mediante 'View(tipo_establecimiento)'."
           )
         }
 

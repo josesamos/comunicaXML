@@ -45,3 +45,11 @@
 #' @format A data frame of strings.
 #'
 "generos"
+
+#' Parentesco
+#'
+#' Códigos y descripciones de parentesco.
+#'
+#' @format A data frame of strings.
+#'
+"parentesco"

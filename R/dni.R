@@ -1,17 +1,17 @@
 
-#' Validate a Spanish DNI (National Identification Number)
+#' Validate a Spanish NIF (National Identification Number)
 #'
-#' It checks if a given Spanish DNI (Documento Nacional de Identidad) is valid.
+#' It checks if a given Spanish NIF (Documento Nacional de Identidad) is valid.
 #' It verifies both the format (8 digits followed by an uppercase letter) and the
 #' control letter, which is computed using the remainder of the division of the
 #' number by 23.
 #'
-#' @param dni A character string representing the DNI to validate.
-#' @return `TRUE` if the DNI is valid, `FALSE` otherwise.
+#' @param dni A character string representing the NIF to validate.
+#' @return `TRUE` if the NIF is valid, `FALSE` otherwise.
 #'
 #' @keywords internal
-validate_dni <- function(dni) {
-  # Control letters for DNI based on modulus 23
+validate_nif <- function(dni) {
+  # Control letters for NIF based on modulus 23
   control_letters <- c("T", "R", "W", "A", "G", "M", "Y", "F", "P", "D",
                        "X", "B", "N", "J", "Z", "S", "Q", "V", "H", "L",
                        "C", "K", "E")
@@ -32,23 +32,52 @@ validate_dni <- function(dni) {
   return(letter == correct_letter)
 }
 
-#' Validar y avisar de DNI español no válido
+
+#' Validate a Spanish NIE (Foreign Identification Number)
 #'
-#' Comprueba si un determinado DNI español (Documento Nacional de Identidad)
-#' es válido. Si el DNI no es válido se emite un aviso especificando la ubicación.
+#' It checks if a given Spanish NIE (Número de Identidad de Extranjero) is valid.
+#' The NIE follows the format: an initial letter (X, Y, or Z), followed by 7 digits,
+#' and a control letter. The validation process involves verifying the format
+#' and computing the correct control letter using the same algorithm as a NIF.
 #'
-#' @param dni Una cadena de caracteres que representa el DNI a validar.
+#' @param nie A character string representing the NIE to validate.
+#' @return `TRUE` if the NIE is valid, `FALSE` otherwise.
+#'
+#' @keywords internal
+validate_nie <- function(nie) {
+  # Validate format: must start with X, Y, or Z, followed by 7 digits and a letter
+  if (!grepl("^[XYZ][0-9]{7}[A-Z]$", nie)) {
+    return(FALSE)
+  }
+
+  # Convert the first letter to its numeric equivalent
+  nie_numeric <- nie
+  substr(nie_numeric, 1, 1) <- switch(substr(nie, 1, 1), X = "0", Y = "1", Z = "2")
+
+  # Validate the NIE as if it were a NIF
+  return(validate_nif(nie_numeric))
+}
+
+
+#' Validar y avisar de NIF o NIE no válido
+#'
+#' Comprueba si un determinado NIF o NIE es válido. Si no es válido se emite un
+#' aviso especificando la ubicación.
+#'
+#' @param dni Una cadena de caracteres que representa el NIF o NIE a validar.
 #' @param ubicacion Una cadena de caracteres que indica la ubicación o contexto en el que se
 #' se está realizando la validación. Esta información está incluida en el mensaje de advertencia.
 #'
-#' @return Siempre se devuelve `TRUE`, pero se emite un aviso si el DNI no es válido.
+#' @return Siempre se devuelve `TRUE`, pero se emite un aviso si el NIF o NIE no es válido.
 #'
 #' @keywords internal
-validar_dni <- function(dni, ubicacion){
-  if (!validate_dni(dni)) {
-    warning(ubicacion, " -> El DNI '",
+validar_nif_nie <- function(dni, ubicacion){
+  if (!(validate_nif(dni) || validate_nie(dni))) {
+    warning(ubicacion, " -> El NIF/NIE '",
          dni,
          "' no es válido.")
   }
   TRUE
 }
+
+
