@@ -83,8 +83,8 @@ Las hojas están relacionadas mediante los campos con los sufijos `_pk` y
 
 ### Completar los datos
 
-Completamos los las hojas de la plantilla con nuestros datos. A
-continuación se muestran unos datos de ejemplo.
+Completamos las hojas de la plantilla con nuestros datos. A continuación
+se muestran unos datos de ejemplo.
 
 #### Hoja: solicitud
 
@@ -266,3 +266,20 @@ cat("```xml\n", paste(contenido, collapse = "\n"), "\n```", sep = "")
 
 Este es el archivo que podemos subir al sistema para realizar el alta
 masiva de comunicaciones.
+
+## Flujo de trabajo completo
+
+A continuación se muestra el flujo de trabajo completo, indicando los
+archivos en la ubicación que deseemos.
+
+``` r
+library(comunicaXML)
+
+achivo <- obtener_hoja_calculo("c:/datos/mis_datos.xlsx")
+
+# Editar el archivo y guardar los datos.
+
+validar_hoja_calculo(achivo)
+
+generar_xml(achivo, "c:/datos/resultado.xml", optimizar = TRUE)
+```
