@@ -20,23 +20,92 @@ knitr::opts_chunk$set(
 [![Codecov test coverage](https://codecov.io/gh/josesamos/comunicaXML/graph/badge.svg)](https://app.codecov.io/gh/josesamos/comunicaXML)
 <!-- badges: end -->
 
-The goal of comunicaXML is to ...
+El objetivo de `comunicaXML` es facilitar la generación del archivo en formato XML para realizar el alta masiva de comunicaciones en el [Sistema de Hospedajes](https://sede.mir.gob.es/opencms/export/sites/default/es/procedimientos-y-servicios/hospedajes-y-alquiler-de-vehiculos/).
 
-## Installation
+## Instalación
 
-You can install the development version of comunicaXML from [GitHub](https://github.com/) with:
+Puedes instalar la versión de desarrollo de `comunicaXML` desde [GitHub](https://github.com/) con:
 
 ``` r
 # install.packages("pak")
 pak::pak("josesamos/comunicaXML")
 ```
 
-## Example
+## Ejemplo
 
-This is a basic example which shows you how to solve a common problem:
+Este es un ejemplo que muestra cómo usar la funcionalidad que ofrece `comunicaXML`. El flujo de trabajo propuesto es el siguiente:
+
+1. Obtener la plantilla (un archivo en formato .ods o .xlsx).
+1. Completar los datos en la hoja de cálculo.
+1. Validar el archivo: detectar posibles errores
+1. Generar el archivo XML.
+
+### Obtener la plantilla
+
+En primer lugar, obtenemos una plantilla de la hoja de cálculo con la que vamos a trabajar. Usamos la función `obtener_hoja_calculo()` a la que le pasamos el nombre y la ubicación donde queremos se cree el archivo (p.e., `c:/datos/mis_datos.xlsx`). Para el ejemplo siguiente, para que se pueda ejecutar aquí, le pasamos una ubicación temporal.
 
 ```{r example}
-# library(comunicaXML)
-## basic example code
+library(comunicaXML)
+
+mis_datos <- file.path(tempdir(), "mis_datos.xlsx")
+
+achivo <- obtener_hoja_calculo(mis_datos)
 ```
 
+A continuación se muestra el contenido de las hojas del archivo obtenido.
+
+```{r, echo=FALSE, results='asis'}
+hojas <- readxl::excel_sheets(achivo)
+for (hoja in hojas) {
+  cat("\n#### Hoja:", hoja)
+  datos <- readxl::read_excel(achivo, sheet = hoja)
+  print(knitr::kable(datos))
+}
+```
+
+Las hojas están relacionadas mediante los campos con los sufijos `_pk` y `_fk`. Hemos de procurar mantener esas relaciones al añadir nueva filas.
+
+### Completar los datos
+
+Completamos los las hojas de la plantilla con nuestros datos. A continuación se muestran unos datos de ejemplo.
+
+```{r, echo=FALSE, results='asis'}
+achivo <- system.file("extdata", "pdf/partes_viajeros.xlsx", package = "comunicaXML")
+
+hojas <- readxl::excel_sheets(achivo)
+for (hoja in hojas) {
+  cat("\n#### Hoja:", hoja)
+  datos <- readxl::read_excel(achivo, sheet = hoja)
+  print(knitr::kable(datos))
+}
+```
+
+### Validar el archivo
+
+Podemos validar nuestro archivo mediante la función `validar_hoja_calculo()` que comprueba las relaciones entre las hojas, los contenidos de los campos en función de las restricciones de formato y dependencias que se definen en la documentación del [Sistema de Hospedajes](https://sede.mir.gob.es/opencms/export/sites/default/es/procedimientos-y-servicios/hospedajes-y-alquiler-de-vehiculos/).
+
+```{r}
+validar_hoja_calculo(achivo)
+```
+
+Para facilitar la corrección de errores, se muestran avisos de los problemas detectados. En este caso, no hay ningún problema.
+
+### Generar el archivo XML
+
+Cuando consideremos que el archivo está correcto, podemos generar el archivo XML mediante la función `generar_xml()`. Indicamos el nombre del archivo de nuestra hoja de cálculo y el nombre del archivo XML que queremos generar (p.e., `c:/datos/resultado.xml`), en este caso, para que se pueda ejecutar aquí, le pasamos también una ubicación temporal para el archivo resultado. Si indicamos el parámetro `optimizar = TRUE` elimina los nodos vacíos del archivo XML obtenido.
+
+```{r}
+resultado_xml <- file.path(tempdir(), "resultado.xml")
+
+archivo_2 <- generar_xml(achivo, resultado_xml, optimizar = TRUE)
+```
+
+A continuación se muestra el contenido del archivo que hemos obtenido.
+
+```{r, results='asis'}
+contenido <- readLines(archivo_2, warn = FALSE)
+
+cat("```xml\n", paste(contenido, collapse = "\n"), "\n```", sep = "")
+```
+
+Este es el archivo que podemos subir al sistema para realizar el alta masiva de comunicaciones.

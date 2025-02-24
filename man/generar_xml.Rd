@@ -4,7 +4,7 @@
 \alias{generar_xml}
 \title{Generar partes de viajeros XML desde una hoja de cálculo}
 \usage{
-generar_xml(hoja_calculo, archivo_xml = NULL, pdf = TRUE)
+generar_xml(hoja_calculo, archivo_xml = NULL, pdf = TRUE, optimizar = FALSE)
 }
 \arguments{
 \item{hoja_calculo}{Carácter. Ruta al archivo de hoja de cálculo que se va a procesar.}
@@ -13,6 +13,8 @@ generar_xml(hoja_calculo, archivo_xml = NULL, pdf = TRUE)
 el archivo XML tendrá el mismo nombre y ubicación que el archivo de hoja de cálculo.}
 
 \item{pdf}{Booleano. Sigue el modelo del archivo pdf o del ejemplo xml.}
+
+\item{optimizar}{Booleano. Elimina los nodos vacíos del archivo xml.}
 }
 \value{
 Carácter. La ruta del archivo del documento XML generado.
