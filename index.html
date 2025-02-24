@@ -245,7 +245,7 @@
 <div class="section level3">
 <h3 id="completar-los-datos">Completar los datos<a class="anchor" aria-label="anchor" href="#completar-los-datos"></a>
 </h3>
-<p>Completamos los las hojas de la plantilla con nuestros datos. A continuación se muestran unos datos de ejemplo.</p>
+<p>Completamos las hojas de la plantilla con nuestros datos. A continuación se muestran unos datos de ejemplo.</p>
 <div class="section level4">
 <h4 id="hoja-solicitud-1">Hoja: solicitud<a class="anchor" aria-label="anchor" href="#hoja-solicitud-1"></a>
 </h4>
@@ -606,6 +606,21 @@
 <span id="cb6-108"><a href="#cb6-108" tabindex="-1"></a>&lt;/<span class="kw">ns2:peticion</span>&gt;</span></code></pre></div>
 <p>Este es el archivo que podemos subir al sistema para realizar el alta masiva de comunicaciones.</p>
 </div>
+</div>
+<div class="section level2">
+<h2 id="flujo-de-trabajo-completo">Flujo de trabajo completo<a class="anchor" aria-label="anchor" href="#flujo-de-trabajo-completo"></a>
+</h2>
+<p>A continuación se muestra el flujo de trabajo completo, indicando los archivos en la ubicación que deseemos.</p>
+<div class="sourceCode" id="cb7"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://josesamos.github.io/comunicaXML/">comunicaXML</a></span><span class="op">)</span></span>
+<span></span>
+<span><span class="va">achivo</span> <span class="op">&lt;-</span> <span class="fu"><a href="reference/obtener_hoja_calculo.html">obtener_hoja_calculo</a></span><span class="op">(</span><span class="st">"c:/datos/mis_datos.xlsx"</span><span class="op">)</span></span>
+<span></span>
+<span><span class="co"># Editar el archivo y guardar los datos.</span></span>
+<span></span>
+<span><span class="fu"><a href="reference/validar_hoja_calculo.html">validar_hoja_calculo</a></span><span class="op">(</span><span class="va">achivo</span><span class="op">)</span></span>
+<span></span>
+<span><span class="fu"><a href="reference/generar_xml.html">generar_xml</a></span><span class="op">(</span><span class="va">achivo</span>, <span class="st">"c:/datos/resultado.xml"</span>, optimizar <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span></code></pre></div>
 </div>
 </div>
   </main><aside class="col-md-3"><div class="license">
