@@ -54,22 +54,558 @@
 </div>
 <!-- badges: start -->
 
-<p>The goal of comunicaXML is to …</p>
+<p>El objetivo de <code>comunicaXML</code> es facilitar la generación del archivo en formato XML para realizar el alta masiva de comunicaciones en el <a href="https://sede.mir.gob.es/opencms/export/sites/default/es/procedimientos-y-servicios/hospedajes-y-alquiler-de-vehiculos/" class="external-link">Sistema de Hospedajes</a>.</p>
 <div class="section level2">
-<h2 id="installation">Installation<a class="anchor" aria-label="anchor" href="#installation"></a>
+<h2 id="instalación">Instalación<a class="anchor" aria-label="anchor" href="#instalaci%C3%B3n"></a>
 </h2>
-<p>You can install the development version of comunicaXML from <a href="https://github.com/" class="external-link">GitHub</a> with:</p>
+<p>Puedes instalar la versión de desarrollo de <code>comunicaXML</code> desde <a href="https://github.com/" class="external-link">GitHub</a> con:</p>
 <div class="sourceCode" id="cb1"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># install.packages("pak")</span></span>
 <span><span class="fu">pak</span><span class="fu">::</span><span class="fu"><a href="https://pak.r-lib.org/reference/pak.html" class="external-link">pak</a></span><span class="op">(</span><span class="st">"josesamos/comunicaXML"</span><span class="op">)</span></span></code></pre></div>
 </div>
 <div class="section level2">
-<h2 id="example">Example<a class="anchor" aria-label="anchor" href="#example"></a>
+<h2 id="ejemplo">Ejemplo<a class="anchor" aria-label="anchor" href="#ejemplo"></a>
 </h2>
-<p>This is a basic example which shows you how to solve a common problem:</p>
+<p>Este es un ejemplo que muestra cómo usar la funcionalidad que ofrece <code>comunicaXML</code>. El flujo de trabajo propuesto es el siguiente:</p>
+<ol style="list-style-type: decimal">
+<li>Obtener la plantilla (un archivo en formato .ods o .xlsx).</li>
+<li>Completar los datos en la hoja de cálculo.</li>
+<li>Validar el archivo: detectar posibles errores</li>
+<li>Generar el archivo XML.</li>
+</ol>
+<div class="section level3">
+<h3 id="obtener-la-plantilla">Obtener la plantilla<a class="anchor" aria-label="anchor" href="#obtener-la-plantilla"></a>
+</h3>
+<p>En primer lugar, obtenemos una plantilla de la hoja de cálculo con la que vamos a trabajar. Usamos la función <code><a href="reference/obtener_hoja_calculo.html">obtener_hoja_calculo()</a></code> a la que le pasamos el nombre y la ubicación donde queremos se cree el archivo (p.e., <code>c:/datos/mis_datos.xlsx</code>). Para el ejemplo siguiente, para que se pueda ejecutar aquí, le pasamos una ubicación temporal.</p>
 <div class="sourceCode" id="cb2"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="co"># library(comunicaXML)</span></span>
-<span><span class="co">## basic example code</span></span></code></pre></div>
+<code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://josesamos.github.io/comunicaXML/">comunicaXML</a></span><span class="op">)</span></span>
+<span></span>
+<span><span class="va">mis_datos</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/file.path.html" class="external-link">file.path</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/tempfile.html" class="external-link">tempdir</a></span><span class="op">(</span><span class="op">)</span>, <span class="st">"mis_datos.xlsx"</span><span class="op">)</span></span>
+<span></span>
+<span><span class="va">achivo</span> <span class="op">&lt;-</span> <span class="fu"><a href="reference/obtener_hoja_calculo.html">obtener_hoja_calculo</a></span><span class="op">(</span><span class="va">mis_datos</span><span class="op">)</span></span></code></pre></div>
+<p>A continuación se muestra el contenido de las hojas del archivo obtenido.</p>
+<div class="section level4">
+<h4 id="hoja-solicitud">Hoja: solicitud<a class="anchor" aria-label="anchor" href="#hoja-solicitud"></a>
+</h4>
+<table class="table">
+<thead><tr class="header">
+<th align="left">solicitud_pk</th>
+<th align="left">codigoEstablecimiento</th>
+</tr></thead>
+<tbody><tr class="odd">
+<td align="left">1</td>
+<td align="left">NA</td>
+</tr></tbody>
+</table>
+</div>
+<div class="section level4">
+<h4 id="hoja-comunicacion">Hoja: comunicacion<a class="anchor" aria-label="anchor" href="#hoja-comunicacion"></a>
+</h4>
+<table class="table">
+<thead><tr class="header">
+<th align="right">comunicacion_pk</th>
+<th align="left">comentario</th>
+<th align="left">solicitud_fk</th>
+</tr></thead>
+<tbody><tr class="odd">
+<td align="right">1</td>
+<td align="left">Comunicación nº 1</td>
+<td align="left">1</td>
+</tr></tbody>
+</table>
+</div>
+<div class="section level4">
+<h4 id="hoja-contrato">Hoja: contrato<a class="anchor" aria-label="anchor" href="#hoja-contrato"></a>
+</h4>
+<table style="width:100%;" class="table">
+<colgroup>
+<col width="7%">
+<col width="7%">
+<col width="7%">
+<col width="7%">
+<col width="7%">
+<col width="7%">
+<col width="7%">
+<col width="7%">
+<col width="7%">
+<col width="7%">
+<col width="7%">
+<col width="7%">
+<col width="7%">
+</colgroup>
+<thead><tr class="header">
+<th align="left">referencia</th>
+<th align="left">fechaContrato</th>
+<th align="left">fechaEntrada</th>
+<th align="left">fechaSalida</th>
+<th align="left">numPersonas</th>
+<th align="left">numHabitaciones</th>
+<th align="left">internet</th>
+<th align="left">tipoPago</th>
+<th align="left">fechaPago</th>
+<th align="left">medioPago</th>
+<th align="left">titular</th>
+<th align="left">caducidadTarjeta</th>
+<th align="right">comunicacion_fk</th>
+</tr></thead>
+<tbody><tr class="odd">
+<td align="left">NA</td>
+<td align="left">NA</td>
+<td align="left">NA</td>
+<td align="left">NA</td>
+<td align="left">NA</td>
+<td align="left">NA</td>
+<td align="left">NA</td>
+<td align="left">NA</td>
+<td align="left">NA</td>
+<td align="left">NA</td>
+<td align="left">NA</td>
+<td align="left">NA</td>
+<td align="right">1</td>
+</tr></tbody>
+</table>
+</div>
+<div class="section level4">
+<h4 id="hoja-persona">Hoja: persona<a class="anchor" aria-label="anchor" href="#hoja-persona"></a>
+</h4>
+<table style="width:100%;" class="table">
+<colgroup>
+<col width="4%">
+<col width="4%">
+<col width="4%">
+<col width="4%">
+<col width="4%">
+<col width="4%">
+<col width="4%">
+<col width="4%">
+<col width="4%">
+<col width="4%">
+<col width="4%">
+<col width="4%">
+<col width="4%">
+<col width="4%">
+<col width="4%">
+<col width="4%">
+<col width="4%">
+<col width="4%">
+<col width="4%">
+<col width="4%">
+<col width="4%">
+</colgroup>
+<thead><tr class="header">
+<th align="left">rol</th>
+<th align="left">nombre</th>
+<th align="left">apellido1</th>
+<th align="left">apellido2</th>
+<th align="left">tipoDocumento</th>
+<th align="left">numeroDocumento</th>
+<th align="left">soporteDocumento</th>
+<th align="left">fechaNacimiento</th>
+<th align="left">nacionalidad</th>
+<th align="left">sexo</th>
+<th align="left">direccion</th>
+<th align="left">direccionComplementaria</th>
+<th align="left">codigoMunicipio</th>
+<th align="left">nombreMunicipio</th>
+<th align="left">codigoPostal</th>
+<th align="left">pais</th>
+<th align="left">telefono</th>
+<th align="left">telefono2</th>
+<th align="left">correo</th>
+<th align="left">parentesco</th>
+<th align="right">comunicacion_fk</th>
+</tr></thead>
+<tbody><tr class="odd">
+<td align="left">NA</td>
+<td align="left">NA</td>
+<td align="left">NA</td>
+<td align="left">NA</td>
+<td align="left">NA</td>
+<td align="left">NA</td>
+<td align="left">NA</td>
+<td align="left">NA</td>
+<td align="left">NA</td>
+<td align="left">NA</td>
+<td align="left">NA</td>
+<td align="left">NA</td>
+<td align="left">NA</td>
+<td align="left">NA</td>
+<td align="left">NA</td>
+<td align="left">NA</td>
+<td align="left">NA</td>
+<td align="left">NA</td>
+<td align="left">NA</td>
+<td align="left">NA</td>
+<td align="right">1</td>
+</tr></tbody>
+</table>
+<p>Las hojas están relacionadas mediante los campos con los sufijos <code>_pk</code> y <code>_fk</code>. Hemos de procurar mantener esas relaciones al añadir nueva filas.</p>
+</div>
+</div>
+<div class="section level3">
+<h3 id="completar-los-datos">Completar los datos<a class="anchor" aria-label="anchor" href="#completar-los-datos"></a>
+</h3>
+<p>Completamos los las hojas de la plantilla con nuestros datos. A continuación se muestran unos datos de ejemplo.</p>
+<div class="section level4">
+<h4 id="hoja-solicitud-1">Hoja: solicitud<a class="anchor" aria-label="anchor" href="#hoja-solicitud-1"></a>
+</h4>
+<table class="table">
+<thead><tr class="header">
+<th align="left">solicitud_pk</th>
+<th align="left">codigoEstablecimiento</th>
+</tr></thead>
+<tbody><tr class="odd">
+<td align="left">1</td>
+<td align="left">A123456789</td>
+</tr></tbody>
+</table>
+</div>
+<div class="section level4">
+<h4 id="hoja-comunicacion-1">Hoja: comunicacion<a class="anchor" aria-label="anchor" href="#hoja-comunicacion-1"></a>
+</h4>
+<table class="table">
+<thead><tr class="header">
+<th align="right">comunicacion_pk</th>
+<th align="left">comentario</th>
+<th align="left">solicitud_fk</th>
+</tr></thead>
+<tbody><tr class="odd">
+<td align="right">1</td>
+<td align="left">Comunicación nº 1</td>
+<td align="left">1</td>
+</tr></tbody>
+</table>
+</div>
+<div class="section level4">
+<h4 id="hoja-contrato-1">Hoja: contrato<a class="anchor" aria-label="anchor" href="#hoja-contrato-1"></a>
+</h4>
+<table style="width:100%;" class="table">
+<colgroup>
+<col width="7%">
+<col width="7%">
+<col width="7%">
+<col width="7%">
+<col width="7%">
+<col width="7%">
+<col width="7%">
+<col width="7%">
+<col width="7%">
+<col width="7%">
+<col width="7%">
+<col width="7%">
+<col width="7%">
+</colgroup>
+<thead><tr class="header">
+<th align="left">referencia</th>
+<th align="left">fechaContrato</th>
+<th align="left">fechaEntrada</th>
+<th align="left">fechaSalida</th>
+<th align="right">numPersonas</th>
+<th align="right">numHabitaciones</th>
+<th align="left">internet</th>
+<th align="left">tipoPago</th>
+<th align="left">fechaPago</th>
+<th align="left">medioPago</th>
+<th align="left">titular</th>
+<th align="left">caducidadTarjeta</th>
+<th align="right">comunicacion_fk</th>
+</tr></thead>
+<tbody><tr class="odd">
+<td align="left">X123ABC</td>
+<td align="left">2025-02-20</td>
+<td align="left">2025-02-21T00:00:00</td>
+<td align="left">2025-02-23T00:00:00</td>
+<td align="right">2</td>
+<td align="right">1</td>
+<td align="left">true</td>
+<td align="left">TARJT</td>
+<td align="left">2025-02-20</td>
+<td align="left">Tarjeta</td>
+<td align="left">Nombre Apellido1 Apellido2</td>
+<td align="left">01/2029</td>
+<td align="right">1</td>
+</tr></tbody>
+</table>
+</div>
+<div class="section level4">
+<h4 id="hoja-persona-1">Hoja: persona<a class="anchor" aria-label="anchor" href="#hoja-persona-1"></a>
+</h4>
+<table style="width:100%;" class="table">
+<colgroup>
+<col width="4%">
+<col width="4%">
+<col width="4%">
+<col width="4%">
+<col width="4%">
+<col width="4%">
+<col width="4%">
+<col width="4%">
+<col width="4%">
+<col width="4%">
+<col width="4%">
+<col width="4%">
+<col width="4%">
+<col width="4%">
+<col width="4%">
+<col width="4%">
+<col width="4%">
+<col width="4%">
+<col width="4%">
+<col width="4%">
+<col width="4%">
+</colgroup>
+<thead><tr class="header">
+<th align="left">rol</th>
+<th align="left">nombre</th>
+<th align="left">apellido1</th>
+<th align="left">apellido2</th>
+<th align="left">tipoDocumento</th>
+<th align="left">numeroDocumento</th>
+<th align="left">soporteDocumento</th>
+<th align="left">fechaNacimiento</th>
+<th align="left">nacionalidad</th>
+<th align="left">sexo</th>
+<th align="left">direccion</th>
+<th align="left">direccionComplementaria</th>
+<th align="left">codigoMunicipio</th>
+<th align="left">nombreMunicipio</th>
+<th align="left">codigoPostal</th>
+<th align="left">pais</th>
+<th align="left">telefono</th>
+<th align="left">telefono2</th>
+<th align="left">correo</th>
+<th align="left">parentesco</th>
+<th align="right">comunicacion_fk</th>
+</tr></thead>
+<tbody>
+<tr class="odd">
+<td align="left">TI</td>
+<td align="left">Nombre1</td>
+<td align="left">Apellido11</td>
+<td align="left">Apellido21</td>
+<td align="left">NIF</td>
+<td align="left">11111111H</td>
+<td align="left">ABC123456</td>
+<td align="left">1980-01-01</td>
+<td align="left">ESP</td>
+<td align="left">H</td>
+<td align="left">Dirección 1</td>
+<td align="left">Complemento 1</td>
+<td align="left">18001</td>
+<td align="left">NA</td>
+<td align="left">18001</td>
+<td align="left">ESP</td>
+<td align="left">111111111</td>
+<td align="left">211111111</td>
+<td align="left"><a href="mailto:correo1@correo.es" class="email">correo1@correo.es</a></td>
+<td align="left">NA</td>
+<td align="right">1</td>
+</tr>
+<tr class="even">
+<td align="left">VI</td>
+<td align="left">Nombre2</td>
+<td align="left">Apellido12</td>
+<td align="left">Apellido22</td>
+<td align="left">NIF</td>
+<td align="left">22222222J</td>
+<td align="left">ABC123457</td>
+<td align="left">1980-01-02</td>
+<td align="left">ESP</td>
+<td align="left">M</td>
+<td align="left">Dirección 2</td>
+<td align="left">NA</td>
+<td align="left">18002</td>
+<td align="left">NA</td>
+<td align="left">18002</td>
+<td align="left">ESP</td>
+<td align="left">222222222</td>
+<td align="left">NA</td>
+<td align="left"><a href="mailto:correo2@correo.es" class="email">correo2@correo.es</a></td>
+<td align="left">NA</td>
+<td align="right">1</td>
+</tr>
+<tr class="odd">
+<td align="left">VI</td>
+<td align="left">Nombre3</td>
+<td align="left">Apellido13</td>
+<td align="left">Apellido23</td>
+<td align="left">NIF</td>
+<td align="left">33333333P</td>
+<td align="left">ABC123458</td>
+<td align="left">1980-01-03</td>
+<td align="left">ESP</td>
+<td align="left">O</td>
+<td align="left">Dirección 3</td>
+<td align="left">Complemento 3</td>
+<td align="left">18003</td>
+<td align="left">NA</td>
+<td align="left">18003</td>
+<td align="left">ESP</td>
+<td align="left">333333333</td>
+<td align="left">233333333</td>
+<td align="left"><a href="mailto:correo3@correo.es" class="email">correo3@correo.es</a></td>
+<td align="left">NA</td>
+<td align="right">1</td>
+</tr>
+<tr class="even">
+<td align="left">VI</td>
+<td align="left">Nombre4</td>
+<td align="left">Apellido14</td>
+<td align="left">Apellido24</td>
+<td align="left">NIF</td>
+<td align="left">44444444A</td>
+<td align="left">ABC123459</td>
+<td align="left">1980-01-04</td>
+<td align="left">ESP</td>
+<td align="left">NA</td>
+<td align="left">Dirección 4</td>
+<td align="left">NA</td>
+<td align="left">18004</td>
+<td align="left">NA</td>
+<td align="left">18004</td>
+<td align="left">ESP</td>
+<td align="left">444444444</td>
+<td align="left">NA</td>
+<td align="left"><a href="mailto:correo4@correo.es" class="email">correo4@correo.es</a></td>
+<td align="left">NA</td>
+<td align="right">1</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+<div class="section level3">
+<h3 id="validar-el-archivo">Validar el archivo<a class="anchor" aria-label="anchor" href="#validar-el-archivo"></a>
+</h3>
+<p>Podemos validar nuestro archivo mediante la función <code><a href="reference/validar_hoja_calculo.html">validar_hoja_calculo()</a></code> que comprueba las relaciones entre las hojas, los contenidos de los campos en función de las restricciones de formato y dependencias que se definen en la documentación del <a href="https://sede.mir.gob.es/opencms/export/sites/default/es/procedimientos-y-servicios/hospedajes-y-alquiler-de-vehiculos/" class="external-link">Sistema de Hospedajes</a>.</p>
+<div class="sourceCode" id="cb3"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="fu"><a href="reference/validar_hoja_calculo.html">validar_hoja_calculo</a></span><span class="op">(</span><span class="va">achivo</span><span class="op">)</span></span>
+<span><span class="co">#&gt; [1] TRUE</span></span></code></pre></div>
+<p>Para facilitar la corrección de errores, se muestran avisos de los problemas detectados. En este caso, no hay ningún problema.</p>
+</div>
+<div class="section level3">
+<h3 id="generar-el-archivo-xml">Generar el archivo XML<a class="anchor" aria-label="anchor" href="#generar-el-archivo-xml"></a>
+</h3>
+<p>Cuando consideremos que el archivo está correcto, podemos generar el archivo XML mediante la función <code><a href="reference/generar_xml.html">generar_xml()</a></code>. Indicamos el nombre del archivo de nuestra hoja de cálculo y el nombre del archivo XML que queremos generar (p.e., <code>c:/datos/resultado.xml</code>), en este caso, para que se pueda ejecutar aquí, le pasamos también una ubicación temporal para el archivo resultado. Si indicamos el parámetro <code>optimizar = TRUE</code> elimina los nodos vacíos del archivo XML obtenido.</p>
+<div class="sourceCode" id="cb4"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="va">resultado_xml</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/file.path.html" class="external-link">file.path</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/tempfile.html" class="external-link">tempdir</a></span><span class="op">(</span><span class="op">)</span>, <span class="st">"resultado.xml"</span><span class="op">)</span></span>
+<span></span>
+<span><span class="va">archivo_2</span> <span class="op">&lt;-</span> <span class="fu"><a href="reference/generar_xml.html">generar_xml</a></span><span class="op">(</span><span class="va">achivo</span>, <span class="va">resultado_xml</span>, optimizar <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span></code></pre></div>
+<p>A continuación se muestra el contenido del archivo que hemos obtenido.</p>
+<div class="sourceCode" id="cb5"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="va">contenido</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/readLines.html" class="external-link">readLines</a></span><span class="op">(</span><span class="va">archivo_2</span>, warn <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span></span>
+<span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/base/cat.html" class="external-link">cat</a></span><span class="op">(</span><span class="st">"```xml\n"</span>, <span class="fu"><a href="https://rdrr.io/r/base/paste.html" class="external-link">paste</a></span><span class="op">(</span><span class="va">contenido</span>, collapse <span class="op">=</span> <span class="st">"\n"</span><span class="op">)</span>, <span class="st">"\n```"</span>, sep <span class="op">=</span> <span class="st">""</span><span class="op">)</span></span></code></pre></div>
+<div class="sourceCode" id="cb6"><pre class="sourceCode xml"><code class="sourceCode xml"><span id="cb6-1"><a href="#cb6-1" tabindex="-1"></a><span class="fu">&lt;?xml</span><span class="ot"> version=</span><span class="st">"1.0"</span><span class="ot"> encoding=</span><span class="st">"UTF-8"</span><span class="fu">?&gt;</span></span>
+<span id="cb6-2"><a href="#cb6-2" tabindex="-1"></a>&lt;<span class="kw">ns2:peticion</span><span class="ot"> xmlns:ns2=</span><span class="st">"http://www.neg.hospedajes.mir.es/altaReservaHospedaje"</span>&gt;</span>
+<span id="cb6-3"><a href="#cb6-3" tabindex="-1"></a>  &lt;<span class="kw">solicitud</span>&gt;</span>
+<span id="cb6-4"><a href="#cb6-4" tabindex="-1"></a>    &lt;<span class="kw">codigoEstablecimiento</span>&gt;A123456789&lt;/<span class="kw">codigoEstablecimiento</span>&gt;</span>
+<span id="cb6-5"><a href="#cb6-5" tabindex="-1"></a>    &lt;<span class="kw">comunicacion</span>&gt;</span>
+<span id="cb6-6"><a href="#cb6-6" tabindex="-1"></a>      <span class="co">&lt;!--Comunicación nº 1--&gt;</span></span>
+<span id="cb6-7"><a href="#cb6-7" tabindex="-1"></a>      &lt;<span class="kw">contrato</span>&gt;</span>
+<span id="cb6-8"><a href="#cb6-8" tabindex="-1"></a>        &lt;<span class="kw">referencia</span>&gt;X123ABC&lt;/<span class="kw">referencia</span>&gt;</span>
+<span id="cb6-9"><a href="#cb6-9" tabindex="-1"></a>        &lt;<span class="kw">fechaContrato</span>&gt;2025-02-20&lt;/<span class="kw">fechaContrato</span>&gt;</span>
+<span id="cb6-10"><a href="#cb6-10" tabindex="-1"></a>        &lt;<span class="kw">fechaEntrada</span>&gt;2025-02-21T00:00:00&lt;/<span class="kw">fechaEntrada</span>&gt;</span>
+<span id="cb6-11"><a href="#cb6-11" tabindex="-1"></a>        &lt;<span class="kw">fechaSalida</span>&gt;2025-02-23T00:00:00&lt;/<span class="kw">fechaSalida</span>&gt;</span>
+<span id="cb6-12"><a href="#cb6-12" tabindex="-1"></a>        &lt;<span class="kw">numPersonas</span>&gt;2&lt;/<span class="kw">numPersonas</span>&gt;</span>
+<span id="cb6-13"><a href="#cb6-13" tabindex="-1"></a>        &lt;<span class="kw">numHabitaciones</span>&gt;1&lt;/<span class="kw">numHabitaciones</span>&gt;</span>
+<span id="cb6-14"><a href="#cb6-14" tabindex="-1"></a>        &lt;<span class="kw">internet</span>&gt;true&lt;/<span class="kw">internet</span>&gt;</span>
+<span id="cb6-15"><a href="#cb6-15" tabindex="-1"></a>        &lt;<span class="kw">pago</span>&gt;</span>
+<span id="cb6-16"><a href="#cb6-16" tabindex="-1"></a>          &lt;<span class="kw">tipoPago</span>&gt;TARJT&lt;/<span class="kw">tipoPago</span>&gt;</span>
+<span id="cb6-17"><a href="#cb6-17" tabindex="-1"></a>          &lt;<span class="kw">fechaPago</span>&gt;2025-02-20&lt;/<span class="kw">fechaPago</span>&gt;</span>
+<span id="cb6-18"><a href="#cb6-18" tabindex="-1"></a>          &lt;<span class="kw">medioPago</span>&gt;Tarjeta&lt;/<span class="kw">medioPago</span>&gt;</span>
+<span id="cb6-19"><a href="#cb6-19" tabindex="-1"></a>          &lt;<span class="kw">titular</span>&gt;Nombre Apellido1 Apellido2&lt;/<span class="kw">titular</span>&gt;</span>
+<span id="cb6-20"><a href="#cb6-20" tabindex="-1"></a>          &lt;<span class="kw">caducidadTarjeta</span>&gt;01/2029&lt;/<span class="kw">caducidadTarjeta</span>&gt;</span>
+<span id="cb6-21"><a href="#cb6-21" tabindex="-1"></a>        &lt;/<span class="kw">pago</span>&gt;</span>
+<span id="cb6-22"><a href="#cb6-22" tabindex="-1"></a>      &lt;/<span class="kw">contrato</span>&gt;</span>
+<span id="cb6-23"><a href="#cb6-23" tabindex="-1"></a>      &lt;<span class="kw">persona</span>&gt;</span>
+<span id="cb6-24"><a href="#cb6-24" tabindex="-1"></a>        &lt;<span class="kw">rol</span>&gt;TI&lt;/<span class="kw">rol</span>&gt;</span>
+<span id="cb6-25"><a href="#cb6-25" tabindex="-1"></a>        &lt;<span class="kw">nombre</span>&gt;Nombre1&lt;/<span class="kw">nombre</span>&gt;</span>
+<span id="cb6-26"><a href="#cb6-26" tabindex="-1"></a>        &lt;<span class="kw">apellido1</span>&gt;Apellido11&lt;/<span class="kw">apellido1</span>&gt;</span>
+<span id="cb6-27"><a href="#cb6-27" tabindex="-1"></a>        &lt;<span class="kw">apellido2</span>&gt;Apellido21&lt;/<span class="kw">apellido2</span>&gt;</span>
+<span id="cb6-28"><a href="#cb6-28" tabindex="-1"></a>        &lt;<span class="kw">tipoDocumento</span>&gt;NIF&lt;/<span class="kw">tipoDocumento</span>&gt;</span>
+<span id="cb6-29"><a href="#cb6-29" tabindex="-1"></a>        &lt;<span class="kw">numeroDocumento</span>&gt;11111111H&lt;/<span class="kw">numeroDocumento</span>&gt;</span>
+<span id="cb6-30"><a href="#cb6-30" tabindex="-1"></a>        &lt;<span class="kw">soporteDocumento</span>&gt;ABC123456&lt;/<span class="kw">soporteDocumento</span>&gt;</span>
+<span id="cb6-31"><a href="#cb6-31" tabindex="-1"></a>        &lt;<span class="kw">fechaNacimiento</span>&gt;1980-01-01&lt;/<span class="kw">fechaNacimiento</span>&gt;</span>
+<span id="cb6-32"><a href="#cb6-32" tabindex="-1"></a>        &lt;<span class="kw">nacionalidad</span>&gt;ESP&lt;/<span class="kw">nacionalidad</span>&gt;</span>
+<span id="cb6-33"><a href="#cb6-33" tabindex="-1"></a>        &lt;<span class="kw">sexo</span>&gt;H&lt;/<span class="kw">sexo</span>&gt;</span>
+<span id="cb6-34"><a href="#cb6-34" tabindex="-1"></a>        &lt;<span class="kw">direccion</span>&gt;</span>
+<span id="cb6-35"><a href="#cb6-35" tabindex="-1"></a>          &lt;<span class="kw">direccion</span>&gt;Dirección 1&lt;/<span class="kw">direccion</span>&gt;</span>
+<span id="cb6-36"><a href="#cb6-36" tabindex="-1"></a>          &lt;<span class="kw">direccionComplementaria</span>&gt;Complemento 1&lt;/<span class="kw">direccionComplementaria</span>&gt;</span>
+<span id="cb6-37"><a href="#cb6-37" tabindex="-1"></a>          &lt;<span class="kw">codigoMunicipio</span>&gt;18001&lt;/<span class="kw">codigoMunicipio</span>&gt;</span>
+<span id="cb6-38"><a href="#cb6-38" tabindex="-1"></a>          &lt;<span class="kw">codigoPostal</span>&gt;18001&lt;/<span class="kw">codigoPostal</span>&gt;</span>
+<span id="cb6-39"><a href="#cb6-39" tabindex="-1"></a>          &lt;<span class="kw">pais</span>&gt;ESP&lt;/<span class="kw">pais</span>&gt;</span>
+<span id="cb6-40"><a href="#cb6-40" tabindex="-1"></a>        &lt;/<span class="kw">direccion</span>&gt;</span>
+<span id="cb6-41"><a href="#cb6-41" tabindex="-1"></a>        &lt;<span class="kw">telefono</span>&gt;111111111&lt;/<span class="kw">telefono</span>&gt;</span>
+<span id="cb6-42"><a href="#cb6-42" tabindex="-1"></a>        &lt;<span class="kw">telefono2</span>&gt;211111111&lt;/<span class="kw">telefono2</span>&gt;</span>
+<span id="cb6-43"><a href="#cb6-43" tabindex="-1"></a>        &lt;<span class="kw">correo</span>&gt;correo1@correo.es&lt;/<span class="kw">correo</span>&gt;</span>
+<span id="cb6-44"><a href="#cb6-44" tabindex="-1"></a>      &lt;/<span class="kw">persona</span>&gt;</span>
+<span id="cb6-45"><a href="#cb6-45" tabindex="-1"></a>      &lt;<span class="kw">persona</span>&gt;</span>
+<span id="cb6-46"><a href="#cb6-46" tabindex="-1"></a>        &lt;<span class="kw">rol</span>&gt;VI&lt;/<span class="kw">rol</span>&gt;</span>
+<span id="cb6-47"><a href="#cb6-47" tabindex="-1"></a>        &lt;<span class="kw">nombre</span>&gt;Nombre2&lt;/<span class="kw">nombre</span>&gt;</span>
+<span id="cb6-48"><a href="#cb6-48" tabindex="-1"></a>        &lt;<span class="kw">apellido1</span>&gt;Apellido12&lt;/<span class="kw">apellido1</span>&gt;</span>
+<span id="cb6-49"><a href="#cb6-49" tabindex="-1"></a>        &lt;<span class="kw">apellido2</span>&gt;Apellido22&lt;/<span class="kw">apellido2</span>&gt;</span>
+<span id="cb6-50"><a href="#cb6-50" tabindex="-1"></a>        &lt;<span class="kw">tipoDocumento</span>&gt;NIF&lt;/<span class="kw">tipoDocumento</span>&gt;</span>
+<span id="cb6-51"><a href="#cb6-51" tabindex="-1"></a>        &lt;<span class="kw">numeroDocumento</span>&gt;22222222J&lt;/<span class="kw">numeroDocumento</span>&gt;</span>
+<span id="cb6-52"><a href="#cb6-52" tabindex="-1"></a>        &lt;<span class="kw">soporteDocumento</span>&gt;ABC123457&lt;/<span class="kw">soporteDocumento</span>&gt;</span>
+<span id="cb6-53"><a href="#cb6-53" tabindex="-1"></a>        &lt;<span class="kw">fechaNacimiento</span>&gt;1980-01-02&lt;/<span class="kw">fechaNacimiento</span>&gt;</span>
+<span id="cb6-54"><a href="#cb6-54" tabindex="-1"></a>        &lt;<span class="kw">nacionalidad</span>&gt;ESP&lt;/<span class="kw">nacionalidad</span>&gt;</span>
+<span id="cb6-55"><a href="#cb6-55" tabindex="-1"></a>        &lt;<span class="kw">sexo</span>&gt;M&lt;/<span class="kw">sexo</span>&gt;</span>
+<span id="cb6-56"><a href="#cb6-56" tabindex="-1"></a>        &lt;<span class="kw">direccion</span>&gt;</span>
+<span id="cb6-57"><a href="#cb6-57" tabindex="-1"></a>          &lt;<span class="kw">direccion</span>&gt;Dirección 2&lt;/<span class="kw">direccion</span>&gt;</span>
+<span id="cb6-58"><a href="#cb6-58" tabindex="-1"></a>          &lt;<span class="kw">codigoMunicipio</span>&gt;18002&lt;/<span class="kw">codigoMunicipio</span>&gt;</span>
+<span id="cb6-59"><a href="#cb6-59" tabindex="-1"></a>          &lt;<span class="kw">codigoPostal</span>&gt;18002&lt;/<span class="kw">codigoPostal</span>&gt;</span>
+<span id="cb6-60"><a href="#cb6-60" tabindex="-1"></a>          &lt;<span class="kw">pais</span>&gt;ESP&lt;/<span class="kw">pais</span>&gt;</span>
+<span id="cb6-61"><a href="#cb6-61" tabindex="-1"></a>        &lt;/<span class="kw">direccion</span>&gt;</span>
+<span id="cb6-62"><a href="#cb6-62" tabindex="-1"></a>        &lt;<span class="kw">telefono</span>&gt;222222222&lt;/<span class="kw">telefono</span>&gt;</span>
+<span id="cb6-63"><a href="#cb6-63" tabindex="-1"></a>        &lt;<span class="kw">correo</span>&gt;correo2@correo.es&lt;/<span class="kw">correo</span>&gt;</span>
+<span id="cb6-64"><a href="#cb6-64" tabindex="-1"></a>      &lt;/<span class="kw">persona</span>&gt;</span>
+<span id="cb6-65"><a href="#cb6-65" tabindex="-1"></a>      &lt;<span class="kw">persona</span>&gt;</span>
+<span id="cb6-66"><a href="#cb6-66" tabindex="-1"></a>        &lt;<span class="kw">rol</span>&gt;VI&lt;/<span class="kw">rol</span>&gt;</span>
+<span id="cb6-67"><a href="#cb6-67" tabindex="-1"></a>        &lt;<span class="kw">nombre</span>&gt;Nombre3&lt;/<span class="kw">nombre</span>&gt;</span>
+<span id="cb6-68"><a href="#cb6-68" tabindex="-1"></a>        &lt;<span class="kw">apellido1</span>&gt;Apellido13&lt;/<span class="kw">apellido1</span>&gt;</span>
+<span id="cb6-69"><a href="#cb6-69" tabindex="-1"></a>        &lt;<span class="kw">apellido2</span>&gt;Apellido23&lt;/<span class="kw">apellido2</span>&gt;</span>
+<span id="cb6-70"><a href="#cb6-70" tabindex="-1"></a>        &lt;<span class="kw">tipoDocumento</span>&gt;NIF&lt;/<span class="kw">tipoDocumento</span>&gt;</span>
+<span id="cb6-71"><a href="#cb6-71" tabindex="-1"></a>        &lt;<span class="kw">numeroDocumento</span>&gt;33333333P&lt;/<span class="kw">numeroDocumento</span>&gt;</span>
+<span id="cb6-72"><a href="#cb6-72" tabindex="-1"></a>        &lt;<span class="kw">soporteDocumento</span>&gt;ABC123458&lt;/<span class="kw">soporteDocumento</span>&gt;</span>
+<span id="cb6-73"><a href="#cb6-73" tabindex="-1"></a>        &lt;<span class="kw">fechaNacimiento</span>&gt;1980-01-03&lt;/<span class="kw">fechaNacimiento</span>&gt;</span>
+<span id="cb6-74"><a href="#cb6-74" tabindex="-1"></a>        &lt;<span class="kw">nacionalidad</span>&gt;ESP&lt;/<span class="kw">nacionalidad</span>&gt;</span>
+<span id="cb6-75"><a href="#cb6-75" tabindex="-1"></a>        &lt;<span class="kw">sexo</span>&gt;O&lt;/<span class="kw">sexo</span>&gt;</span>
+<span id="cb6-76"><a href="#cb6-76" tabindex="-1"></a>        &lt;<span class="kw">direccion</span>&gt;</span>
+<span id="cb6-77"><a href="#cb6-77" tabindex="-1"></a>          &lt;<span class="kw">direccion</span>&gt;Dirección 3&lt;/<span class="kw">direccion</span>&gt;</span>
+<span id="cb6-78"><a href="#cb6-78" tabindex="-1"></a>          &lt;<span class="kw">direccionComplementaria</span>&gt;Complemento 3&lt;/<span class="kw">direccionComplementaria</span>&gt;</span>
+<span id="cb6-79"><a href="#cb6-79" tabindex="-1"></a>          &lt;<span class="kw">codigoMunicipio</span>&gt;18003&lt;/<span class="kw">codigoMunicipio</span>&gt;</span>
+<span id="cb6-80"><a href="#cb6-80" tabindex="-1"></a>          &lt;<span class="kw">codigoPostal</span>&gt;18003&lt;/<span class="kw">codigoPostal</span>&gt;</span>
+<span id="cb6-81"><a href="#cb6-81" tabindex="-1"></a>          &lt;<span class="kw">pais</span>&gt;ESP&lt;/<span class="kw">pais</span>&gt;</span>
+<span id="cb6-82"><a href="#cb6-82" tabindex="-1"></a>        &lt;/<span class="kw">direccion</span>&gt;</span>
+<span id="cb6-83"><a href="#cb6-83" tabindex="-1"></a>        &lt;<span class="kw">telefono</span>&gt;333333333&lt;/<span class="kw">telefono</span>&gt;</span>
+<span id="cb6-84"><a href="#cb6-84" tabindex="-1"></a>        &lt;<span class="kw">telefono2</span>&gt;233333333&lt;/<span class="kw">telefono2</span>&gt;</span>
+<span id="cb6-85"><a href="#cb6-85" tabindex="-1"></a>        &lt;<span class="kw">correo</span>&gt;correo3@correo.es&lt;/<span class="kw">correo</span>&gt;</span>
+<span id="cb6-86"><a href="#cb6-86" tabindex="-1"></a>      &lt;/<span class="kw">persona</span>&gt;</span>
+<span id="cb6-87"><a href="#cb6-87" tabindex="-1"></a>      &lt;<span class="kw">persona</span>&gt;</span>
+<span id="cb6-88"><a href="#cb6-88" tabindex="-1"></a>        &lt;<span class="kw">rol</span>&gt;VI&lt;/<span class="kw">rol</span>&gt;</span>
+<span id="cb6-89"><a href="#cb6-89" tabindex="-1"></a>        &lt;<span class="kw">nombre</span>&gt;Nombre4&lt;/<span class="kw">nombre</span>&gt;</span>
+<span id="cb6-90"><a href="#cb6-90" tabindex="-1"></a>        &lt;<span class="kw">apellido1</span>&gt;Apellido14&lt;/<span class="kw">apellido1</span>&gt;</span>
+<span id="cb6-91"><a href="#cb6-91" tabindex="-1"></a>        &lt;<span class="kw">apellido2</span>&gt;Apellido24&lt;/<span class="kw">apellido2</span>&gt;</span>
+<span id="cb6-92"><a href="#cb6-92" tabindex="-1"></a>        &lt;<span class="kw">tipoDocumento</span>&gt;NIF&lt;/<span class="kw">tipoDocumento</span>&gt;</span>
+<span id="cb6-93"><a href="#cb6-93" tabindex="-1"></a>        &lt;<span class="kw">numeroDocumento</span>&gt;44444444A&lt;/<span class="kw">numeroDocumento</span>&gt;</span>
+<span id="cb6-94"><a href="#cb6-94" tabindex="-1"></a>        &lt;<span class="kw">soporteDocumento</span>&gt;ABC123459&lt;/<span class="kw">soporteDocumento</span>&gt;</span>
+<span id="cb6-95"><a href="#cb6-95" tabindex="-1"></a>        &lt;<span class="kw">fechaNacimiento</span>&gt;1980-01-04&lt;/<span class="kw">fechaNacimiento</span>&gt;</span>
+<span id="cb6-96"><a href="#cb6-96" tabindex="-1"></a>        &lt;<span class="kw">nacionalidad</span>&gt;ESP&lt;/<span class="kw">nacionalidad</span>&gt;</span>
+<span id="cb6-97"><a href="#cb6-97" tabindex="-1"></a>        &lt;<span class="kw">direccion</span>&gt;</span>
+<span id="cb6-98"><a href="#cb6-98" tabindex="-1"></a>          &lt;<span class="kw">direccion</span>&gt;Dirección 4&lt;/<span class="kw">direccion</span>&gt;</span>
+<span id="cb6-99"><a href="#cb6-99" tabindex="-1"></a>          &lt;<span class="kw">codigoMunicipio</span>&gt;18004&lt;/<span class="kw">codigoMunicipio</span>&gt;</span>
+<span id="cb6-100"><a href="#cb6-100" tabindex="-1"></a>          &lt;<span class="kw">codigoPostal</span>&gt;18004&lt;/<span class="kw">codigoPostal</span>&gt;</span>
+<span id="cb6-101"><a href="#cb6-101" tabindex="-1"></a>          &lt;<span class="kw">pais</span>&gt;ESP&lt;/<span class="kw">pais</span>&gt;</span>
+<span id="cb6-102"><a href="#cb6-102" tabindex="-1"></a>        &lt;/<span class="kw">direccion</span>&gt;</span>
+<span id="cb6-103"><a href="#cb6-103" tabindex="-1"></a>        &lt;<span class="kw">telefono</span>&gt;444444444&lt;/<span class="kw">telefono</span>&gt;</span>
+<span id="cb6-104"><a href="#cb6-104" tabindex="-1"></a>        &lt;<span class="kw">correo</span>&gt;correo4@correo.es&lt;/<span class="kw">correo</span>&gt;</span>
+<span id="cb6-105"><a href="#cb6-105" tabindex="-1"></a>      &lt;/<span class="kw">persona</span>&gt;</span>
+<span id="cb6-106"><a href="#cb6-106" tabindex="-1"></a>    &lt;/<span class="kw">comunicacion</span>&gt;</span>
+<span id="cb6-107"><a href="#cb6-107" tabindex="-1"></a>  &lt;/<span class="kw">solicitud</span>&gt;</span>
+<span id="cb6-108"><a href="#cb6-108" tabindex="-1"></a>&lt;/<span class="kw">ns2:peticion</span>&gt;</span></code></pre></div>
+<p>Este es el archivo que podemos subir al sistema para realizar el alta masiva de comunicaciones.</p>
+</div>
 </div>
 </div>
   </main><aside class="col-md-3"><div class="license">

@@ -40,7 +40,7 @@ de salida XML que contiene datos estructurados.</p>
 
     <div class="section level2">
     <h2 id="ref-usage">Usage<a class="anchor" aria-label="anchor" href="#ref-usage"></a></h2>
-    <div class="sourceCode"><pre class="sourceCode r"><code><span><span class="fu">generar_xml</span><span class="op">(</span><span class="va">hoja_calculo</span>, archivo_xml <span class="op">=</span> <span class="cn">NULL</span>, pdf <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span></code></pre></div>
+    <div class="sourceCode"><pre class="sourceCode r"><code><span><span class="fu">generar_xml</span><span class="op">(</span><span class="va">hoja_calculo</span>, archivo_xml <span class="op">=</span> <span class="cn">NULL</span>, pdf <span class="op">=</span> <span class="cn">TRUE</span>, optimizar <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span></span></code></pre></div>
     </div>
 
     <div class="section level2">
@@ -58,6 +58,10 @@ el archivo XML tendrá el mismo nombre y ubicación que el archivo de hoja de c�
 
 <dt id="arg-pdf">pdf<a class="anchor" aria-label="anchor" href="#arg-pdf"></a></dt>
 <dd><p>Booleano. Sigue el modelo del archivo pdf o del ejemplo xml.</p></dd>
+
+
+<dt id="arg-optimizar">optimizar<a class="anchor" aria-label="anchor" href="#arg-optimizar"></a></dt>
+<dd><p>Booleano. Elimina los nodos vacíos del archivo xml.</p></dd>
 
 </dl></div>
     <div class="section level2">
