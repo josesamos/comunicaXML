@@ -20,18 +20,25 @@
 #' @param hoja_calculo Carácter. Ruta al archivo de hoja de cálculo que se va a procesar.
 #' @param archivo_xml Carácter (opcional). Ruta del archivo XML de salida. Si es NULO,
 #' el archivo XML tendrá el mismo nombre y ubicación que el archivo de hoja de cálculo.
+#' @param pdf Booleano. Sigue el modelo del archivo pdf o del ejemplo xml.
 #'
 #' @return Carácter. La ruta del archivo del documento XML generado.
 #'
 #' @examples
-#' hoja_calculo <- system.file("extdata", "partes_viajeros.xlsx", package = "comunicaXML")
+#' hoja_calculo <- system.file("extdata", "pdf/partes_viajeros.xlsx", package = "comunicaXML")
 #' archivo_xml <- tempfile(fileext = ".xml")
 #'
 #' archivo <- generar_xml(hoja_calculo, archivo_xml)
 #'
 #' @export
-generar_xml <- function(hoja_calculo, archivo_xml = NULL) {
+generar_xml <- function(hoja_calculo, archivo_xml = NULL, pdf = TRUE) {
+  if (pdf) {
+    plantilla <- "pdf/templates/partes_viajeros.xml"
+  }else {
+    plantilla <- "xml/templates/partes_viajeros.xml"
+  }
+
   tab2xml::sheet2xml(hoja_calculo,
-                     system.file("extdata", "partes_viajeros.xml", package = "comunicaXML"),
+                     system.file("extdata", plantilla, package = "comunicaXML"),
                      archivo_xml)
 }

@@ -4,13 +4,15 @@
 \alias{generar_xml}
 \title{Generar partes de viajeros XML desde una hoja de cálculo}
 \usage{
-generar_xml(hoja_calculo, archivo_xml = NULL)
+generar_xml(hoja_calculo, archivo_xml = NULL, pdf = TRUE)
 }
 \arguments{
 \item{hoja_calculo}{Carácter. Ruta al archivo de hoja de cálculo que se va a procesar.}
 
 \item{archivo_xml}{Carácter (opcional). Ruta del archivo XML de salida. Si es NULO,
 el archivo XML tendrá el mismo nombre y ubicación que el archivo de hoja de cálculo.}
+
+\item{pdf}{Booleano. Sigue el modelo del archivo pdf o del ejemplo xml.}
 }
 \value{
 Carácter. La ruta del archivo del documento XML generado.
@@ -20,7 +22,7 @@ Esta función lee un archivo de hoja de cálculo (Excel o ODS) y genera un archi
 de salida XML que contiene datos estructurados.
 }
 \examples{
-hoja_calculo <- system.file("extdata", "partes_viajeros.xlsx", package = "comunicaXML")
+hoja_calculo <- system.file("extdata", "pdf/partes_viajeros.xlsx", package = "comunicaXML")
 archivo_xml <- tempfile(fileext = ".xml")
 
 archivo <- generar_xml(hoja_calculo, archivo_xml)

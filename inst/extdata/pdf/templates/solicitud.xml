@@ -1,0 +1,4 @@
+  <solicitud>
+    <codigoEstablecimiento>{codigoEstablecimiento}</codigoEstablecimiento>
+    {comunicacion}
+  </solicitud>

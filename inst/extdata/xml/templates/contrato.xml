@@ -1,0 +1,16 @@
+      <contrato>
+        <referencia>{referencia}</referencia>
+        <fechaContrato>{fechaContrato}</fechaContrato>
+        <fechaEntrada>{fechaEntrada}</fechaEntrada>
+        <fechaSalida>{fechaSalida}</fechaSalida>
+        <numPersonas>{numPersonas}</numPersonas>
+        <numHabitaciones>{numHabitaciones}</numHabitaciones>
+        <internet>{internet}</internet>
+        <pago>
+          <tipoPago>{tipoPago}</tipoPago>
+          <fechaPago>{fechaPago}</fechaPago>
+          <medioPago>{medioPago}</medioPago>
+          <titular>{titular}</titular>
+          <caducidadTarjeta>{caducidadTarjeta}</caducidadTarjeta>
+        </pago>
+      </contrato>

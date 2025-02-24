@@ -7,17 +7,18 @@
 #' con los requisitos de validación.
 #'
 #' @param hoja_calculo Ruta al archivo de hoja de cálculo en formato `.xlsx` o `.ods`.
+#' @param pdf Booleano. Sigue el modelo del archivo pdf o del ejemplo xml.
 #'
 #' @return Devuelve `TRUE` si la validación se completa sin errores. En caso de problemas,
 #'         se generan errores (`stop`) o advertencias (`warning`).
 #'
 #' @examples
-#' hoja_calculo <- system.file("extdata", "partes_viajeros.xlsx", package = "comunicaXML")
+#' hoja_calculo <- system.file("extdata", "pdf/partes_viajeros.xlsx", package = "comunicaXML")
 #'
 #' res <- validar_hoja_calculo(hoja_calculo)
 #'
 #' @export
-validar_hoja_calculo<- function(hoja_calculo) {
+validar_hoja_calculo<- function(hoja_calculo, pdf = TRUE) {
   if (!file.exists(hoja_calculo)) {
     stop("El archivo no existe: ", hoja_calculo)
   }
@@ -41,8 +42,13 @@ validar_hoja_calculo<- function(hoja_calculo) {
   names(sheets_data) <- tolower(sheet_names)
 
   validate_pk(sheets_data$comunicacion, "comunicacion")
-
-  validar_establecimiento(sheets_data$comunicacion, sheets_data$establecimiento)
+  if (pdf) {
+    validate_pk(sheets_data$solicitud, "solicitud")
+    validar_solicitud(sheets_data$solicitud)
+    validate_fk(sheets_data$solicitud, "solicitud", sheets_data$comunicacion, "comunicacion")
+  } else {
+    validar_establecimiento(sheets_data$comunicacion, sheets_data$establecimiento)
+  }
 
   validar_contrato(sheets_data$comunicacion, sheets_data$contrato)
 
