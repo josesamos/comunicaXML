@@ -34,7 +34,7 @@ validar_hoja_calculo<- function(hoja_calculo, pdf = TRUE) {
   } else if (extension == "ods") {
     sheet_names <- readODS::ods_sheets(hoja_calculo)
     sheets_data <- lapply(seq_along(sheet_names), function(sheet)
-      readODS::read_ods(hoja_calculo, sheet = sheet))
+      readODS::read_ods(hoja_calculo, sheet = sheet, col_types = NA))
 
   } else {
     stop("Formato no compatible. Utilice un archivo .xlsx o .ods.")
