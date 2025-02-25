@@ -17,7 +17,7 @@ validate_pk <- function(table, name) {
     warning("La columna '", pk, "' no existe en la hoja '", name, "'.")
   } else {
     valores <- table[[pk]]
-    if (!(all(!is.na(valores)) &&
+    if (!(all(!is_cell_empty(valores)) &&
           length(unique(valores)) == nrow(table))) {
       warning("La columna '",
               pk,

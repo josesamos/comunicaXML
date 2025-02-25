@@ -34,7 +34,7 @@ validar_persona <- function(comunicacion, persona) {
       warning("El campo 'rol' solo puede tomar los valores 'TI' o 'VI'.")
     }
     titulares <- sum(bloque == "TI")
-    if (is.na(titulares) || titulares == 0) {
+    if (is_cell_empty(titulares) || titulares == 0) {
       warning("Debe haber una persona con el rol Titular (TI) obligatoriamente. Las personas con el rol de viajero (VI) son opcionales.")
     }
 
@@ -49,8 +49,7 @@ validar_persona <- function(comunicacion, persona) {
     def_parentesco <- fnac_parent[es_mayor_de_edad(fnac_parent$fechaNacimiento), 'parentesco']
     if (!is.null(def_parentesco) && is.data.frame(def_parentesco) && nrow(def_parentesco) > 0) {
       def_parentesco <- def_parentesco[[1]]
-      def_parentesco <- def_parentesco[!is.na(def_parentesco)]
-      def_parentesco <- def_parentesco[def_parentesco != '']
+      def_parentesco <- def_parentesco[!is_cell_empty(def_parentesco)]
     } else {
       def_parentesco <- character(0)
     }
@@ -61,47 +60,47 @@ validar_persona <- function(comunicacion, persona) {
 
   for (i in 1:nrow(df)) {
     ubicacion <- sprintf('persona (fila %d)', i)
-    if (is.na(df$rol[i])) {
+    if (is_cell_empty(df$rol[i])) {
       warning(ubicacion,
               " -> Falta el campo 'rol'.")
     }
-    if (is.na(df$nombre[i])) {
+    if (is_cell_empty(df$nombre[i])) {
       warning(ubicacion,
               " -> Falta el campo 'nombre'.")
     }
-    if (is.na(df$apellido1[i])) {
+    if (is_cell_empty(df$apellido1[i])) {
       warning(ubicacion,
               " -> Falta el campo 'apellido1'.")
     }
-    if (is.na(df$fechaNacimiento[i])) {
+    if (is_cell_empty(df$fechaNacimiento[i])) {
       warning(ubicacion,
               " -> Falta la fecha de nacimiento.")
     } else {
       validar_fecha(df$fechaNacimiento[i], ubicacion)
       if (es_mayor_de_edad(df$fechaNacimiento[i])) {
-        if (is.na(df$tipoDocumento[i])) {
+        if (is_cell_empty(df$tipoDocumento[i])) {
           warning(ubicacion,
                   " -> Falta el campo 'tipo_documento'. Consulta los c\u00f3digos mediante 'View(tipo_documento)'.")
         }
-        if (is.na(df$numeroDocumento[i])) {
+        if (is_cell_empty(df$numeroDocumento[i])) {
           warning(ubicacion,
                   " -> Falta el campo 'numeroDocumento'.")
         }
       }
     }
-    if (!is.na(df$tipoDocumento[i])) {
+    if (!is_cell_empty(df$tipoDocumento[i])) {
       if (!(df$tipoDocumento[i] %in% tipo_documento$codigo)) {
         warning(ubicacion,
                 " -> El campo 'tipo_documento' no es v\u00e1lido. Consulta los c\u00f3digos mediante 'View(tipo_documento)'.")
       }
       if (df$tipoDocumento[i] == 'NIF') {
-        if (is.na(df$apellido2[i])) {
+        if (is_cell_empty(df$apellido2[i])) {
           warning(ubicacion,
                   " -> Falta el campo 'apellido2'. Obligatorio si el tipo de documento es NIF.")
         }
       }
       if (df$tipoDocumento[i] %in% c('NIF', 'NIE')) {
-        if (is.na(df$soporteDocumento[i])) {
+        if (is_cell_empty(df$soporteDocumento[i])) {
           warning(ubicacion,
                   " -> Falta el campo 'soporteDocumento'. Obligatorio si el tipo de documento es NIF o NIE.")
         } else if (!grepl("^[A-Za-z0-9]{9}$", df$soporteDocumento[i])) {
@@ -111,30 +110,30 @@ validar_persona <- function(comunicacion, persona) {
         validar_nif_nie(df$numeroDocumento[i], ubicacion)
       }
     }
-    if (!is.na(df$nacionalidad[i])) {
+    if (!is_cell_empty(df$nacionalidad[i])) {
       validar_pais(df$nacionalidad[i], ubicacion)
     }
-    if (!is.na(df$sexo[i])) {
+    if (!is_cell_empty(df$sexo[i])) {
       if (!(df$sexo[i] %in% generos$codigo)) {
         warning(ubicacion,
                 " -> El campo 'sexo' no es v\u00e1lido. Consulta los c\u00f3digos mediante 'View(generos)'.")
       }
     }
-    if (is.na(df$telefono[i]) && is.na(df$telefono2[i]) && is.na(df$correo[i])) {
+    if (is_cell_empty(df$telefono[i]) && is_cell_empty(df$telefono2[i]) && is_cell_empty(df$correo[i])) {
       warning(ubicacion,
               " -> Obligatorio incluir una de estas tres etiquetas: 'telefono', 'telefono2' o 'correo'.")
     } else {
-      if (!is.na(df$telefono[i])) {
+      if (!is_cell_empty(df$telefono[i])) {
         validar_telefono(df$telefono[i], ubicacion)
       }
-      if (!is.na(df$telefono2[i])) {
+      if (!is_cell_empty(df$telefono2[i])) {
         validar_telefono(df$telefono2[i], ubicacion)
       }
-      if (!is.na(df$correo[i])) {
+      if (!is_cell_empty(df$correo[i])) {
         validar_email(df$correo[i], ubicacion)
       }
     }
-    if (!is.na(df$parentesco[i])) {
+    if (!is_cell_empty(df$parentesco[i])) {
       if (!(df$parentesco[i] %in% parentesco$codigo)) {
         warning(ubicacion,
                 " -> El campo 'parentesco' no es v\u00e1lido. Consulta los c\u00f3digos mediante 'View(parentesco)'.")

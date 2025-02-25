@@ -32,23 +32,23 @@ validar_contrato <- function(comunicacion, contrato) {
 
   for (i in 1:nrow(df)) {
     ubicacion <- sprintf('contrato (fila %d)', i)
-    if (is.na(df$referencia[i])) {
+    if (is_cell_empty(df$referencia[i])) {
       warning(ubicacion,
               " -> Falta el n\u00famero de referencia del contrato.")
     }
-    if (is.na(df$fechaContrato[i])) {
+    if (is_cell_empty(df$fechaContrato[i])) {
       warning(ubicacion,
               " -> Falta la fecha del contrato.")
     } else {
       validar_fecha(df$fechaContrato[i], ubicacion)
     }
-    if (is.na(df$fechaEntrada[i])) {
+    if (is_cell_empty(df$fechaEntrada[i])) {
       warning(ubicacion,
               " -> Falta la fecha de entrada.")
     } else {
       validar_fecha_hora(df$fechaEntrada[i], ubicacion)
     }
-    if (is.na(df$fechaSalida[i])) {
+    if (is_cell_empty(df$fechaSalida[i])) {
       warning(ubicacion,
               " -> Falta la fecha de salida.")
     } else {
@@ -67,7 +67,7 @@ validar_contrato <- function(comunicacion, contrato) {
         " -> El n\u00famero de personas ha de ser un n\u00famero entero mayor que 0."
       )
     }
-    if (!is.na(df$numHabitaciones[i])) {
+    if (!is_cell_empty(df$numHabitaciones[i])) {
       if (!grepl("^[1-9][0-9]*$", df$numHabitaciones[i])) {
         warning(
           ubicacion,
@@ -75,7 +75,7 @@ validar_contrato <- function(comunicacion, contrato) {
         )
       }
     }
-    if (!is.na(df$internet[i])) {
+    if (!is_cell_empty(df$internet[i])) {
       if (!(df$internet[i] %in% c("true", "false"))) {
         warning(
           ubicacion,
@@ -89,10 +89,10 @@ validar_contrato <- function(comunicacion, contrato) {
         " -> El campo 'tipoPago' no es v\u00e1lido. Consulta los c\u00f3digos mediante 'View(tipo_pago)'.."
       )
     }
-    if (!is.na(df$fechaPago[i])) {
+    if (!is_cell_empty(df$fechaPago[i])) {
       validar_fecha(df$fechaPago[i], ubicacion)
     }
-    if (!is.na(df$caducidadTarjeta[i])) {
+    if (!is_cell_empty(df$caducidadTarjeta[i])) {
       validar_fecha_tarjeta(df$caducidadTarjeta[i], ubicacion)
     }
   }

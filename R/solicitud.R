@@ -17,7 +17,7 @@ validar_solicitud <- function(solicitud) {
 
   for (i in 1:nrow(df)) {
     ubicacion <- sprintf('solicitud (fila %d)', i)
-    if (is.na(df$codigoEstablecimiento[i])) {
+    if (is_cell_empty(df$codigoEstablecimiento[i])) {
       warning(ubicacion,
               " -> Falta el campo 'codigoEstablecimiento'.")
     }

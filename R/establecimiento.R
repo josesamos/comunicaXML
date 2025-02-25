@@ -29,9 +29,9 @@ validar_establecimiento <- function(comunicacion, establecimiento) {
 
   for (i in 1:nrow(df)) {
     ubicacion <- sprintf('establecimiento (fila %d)', i)
-    resto_instanciado  <- sum(!is.na(df[i, ]))
-    if (is.na(df$codigo[i])) {
-      if (is.na(df$tipo)) {
+    resto_instanciado  <- sum(!is_cell_empty(df[i, ]))
+    if (is_cell_empty(df$codigo[i])) {
+      if (is_cell_empty(df$tipo[i])) {
         warning(ubicacion,
                 " -> Falta el campo 'tipo'. Consulta los c\u00f3digos mediante 'View(tipo_establecimiento)'."
         )
@@ -43,7 +43,7 @@ validar_establecimiento <- function(comunicacion, establecimiento) {
           )
         }
       }
-      if (is.na(df$nombre)) {
+      if (is_cell_empty(df$nombre[i])) {
         warning(ubicacion,
                 " -> Falta el campo 'nombre'."
         )

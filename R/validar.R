@@ -29,7 +29,7 @@ validar_hoja_calculo<- function(hoja_calculo, pdf = TRUE) {
   if (extension == "xlsx") {
     sheet_names <- readxl::excel_sheets(hoja_calculo)
     sheets_data <- lapply(sheet_names, function(sheet)
-      readxl::read_excel(hoja_calculo, sheet = sheet))
+      readxl::read_excel(hoja_calculo, sheet = sheet, col_types = "text"))
 
   } else if (extension == "ods") {
     sheet_names <- readODS::ods_sheets(hoja_calculo)

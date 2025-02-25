@@ -26,17 +26,17 @@
 validar_direccion <- function(direccion, ubicacion) {
   df <- direccion
 
-  if (is.na(df$direccion)) {
+  if (is_cell_empty(df$direccion)) {
     warning(ubicacion,
             " -> Falta el campo 'direccion'.")
   }
-  if (is.na(df$pais)) {
+  if (is_cell_empty(df$pais)) {
     warning(ubicacion,
             " -> Falta el campo 'pais'.")
   } else {
     validar_pais(df$pais, ubicacion)
     if (df$pais == 'ESP') {
-      if (is.na(df$codigoMunicipio) || (!is.na(df$nombreMunicipio))) {
+      if (is_cell_empty(df$codigoMunicipio) || (!is_cell_empty(df$nombreMunicipio))) {
         warning(
           ubicacion,
           " -> Si el pa\u00eds es Espa\u00f1a (ESP), el c\u00f3digo de municipio ha de ir informado, no as\u00ed el nombre del municipio."
@@ -45,7 +45,7 @@ validar_direccion <- function(direccion, ubicacion) {
         validar_municipio(df$codigoMunicipio, ubicacion)
       }
     } else {
-      if ((!is.na(df$codigoMunicipio)) || is.na(df$nombreMunicipio)) {
+      if ((!is_cell_empty(df$codigoMunicipio)) || is_cell_empty(df$nombreMunicipio)) {
         warning(
           ubicacion,
           " -> Si el pa\u00eds es distinto de Espa\u00f1a (ESP), ha de informar el nombre del municipio, no as\u00ed el c\u00f3digo de municipio."
@@ -53,10 +53,10 @@ validar_direccion <- function(direccion, ubicacion) {
       }
     }
   }
-  if (is.na(df$codigoPostal)) {
+  if (is_cell_empty(df$codigoPostal)) {
     warning(ubicacion,
             " -> Falta el campo 'codigoPostal'.")
-  } else if (!is.na(df$pais)) {
+  } else if (!is_cell_empty(df$pais)) {
     if (df$pais == 'ESP') {
       if (!validar_codigo_postal(df$codigoPostal)) {
         warning(ubicacion, " -> El c\u00f3digo postal '",
