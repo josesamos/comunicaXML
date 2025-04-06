@@ -14,7 +14,6 @@
 <url><loc>https://josesamos.github.io/comunicaXML/reference/municipios.html</loc></url>
 <url><loc>https://josesamos.github.io/comunicaXML/reference/obtener_hoja_calculo.html</loc></url>
 <url><loc>https://josesamos.github.io/comunicaXML/reference/parentesco.html</loc></url>
-<url><loc>https://josesamos.github.io/comunicaXML/reference/remove_empty_nodes.html</loc></url>
 <url><loc>https://josesamos.github.io/comunicaXML/reference/tipo_documento.html</loc></url>
 <url><loc>https://josesamos.github.io/comunicaXML/reference/tipo_establecimiento.html</loc></url>
 <url><loc>https://josesamos.github.io/comunicaXML/reference/tipo_pago.html</loc></url>
@@ -31,11 +30,8 @@
 <url><loc>https://josesamos.github.io/comunicaXML/reference/validar_nif_nie.html</loc></url>
 <url><loc>https://josesamos.github.io/comunicaXML/reference/validar_pais.html</loc></url>
 <url><loc>https://josesamos.github.io/comunicaXML/reference/validar_persona.html</loc></url>
-<url><loc>https://josesamos.github.io/comunicaXML/reference/validar_solicitud.html</loc></url>
 <url><loc>https://josesamos.github.io/comunicaXML/reference/validar_telefono.html</loc></url>
-<url><loc>https://josesamos.github.io/comunicaXML/reference/validate_fk.html</loc></url>
 <url><loc>https://josesamos.github.io/comunicaXML/reference/validate_nie.html</loc></url>
 <url><loc>https://josesamos.github.io/comunicaXML/reference/validate_nif.html</loc></url>
-<url><loc>https://josesamos.github.io/comunicaXML/reference/validate_pk.html</loc></url>
 </urlset>
 
