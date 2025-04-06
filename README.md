@@ -74,9 +74,9 @@ obtenido.
 
 #### Hoja: persona
 
-| rol | nombre | apellido1 | apellido2 | tipoDocumento | numeroDocumento | soporteDocumento | fechaNacimiento | nacionalidad | sexo | direccion | direccionComplementaria | codigoMunicipio | nombreMunicipio | codigoPostal | pais | telefono | telefono2 | correo | parentesco | comunicacion_fk |
-|:---|:---|:---|:---|:---|:---|:---|:---|:---|:---|:---|:---|:---|:---|:---|:---|:---|:---|:---|:---|---:|
-| NA | NA | NA | NA | NA | NA | NA | NA | NA | NA | NA | NA | NA | NA | NA | NA | NA | NA | NA | NA | 1 |
+| rol | nombre | apellido1 | apellido2 | tipoDocumento | numeroDocumento | fechaNacimiento | nacionalidad | sexo | direccion | direccionComplementaria | codigoMunicipio | nombreMunicipio | codigoPostal | pais | telefono | telefono2 | correo | parentesco | comunicacion_fk |
+|:---|:---|:---|:---|:---|:---|:---|:---|:---|:---|:---|:---|:---|:---|:---|:---|:---|:---|:---|---:|
+| NA | NA | NA | NA | NA | NA | NA | NA | NA | NA | NA | NA | NA | NA | NA | NA | NA | NA | NA | 1 |
 
 Las hojas están relacionadas mediante los campos con los sufijos `_pk` y
 `_fk`. Hemos de procurar mantener esas relaciones al añadir nueva filas.
@@ -106,12 +106,12 @@ se muestran unos datos de ejemplo.
 
 #### Hoja: persona
 
-| rol | nombre | apellido1 | apellido2 | tipoDocumento | numeroDocumento | soporteDocumento | fechaNacimiento | nacionalidad | sexo | direccion | direccionComplementaria | codigoMunicipio | nombreMunicipio | codigoPostal | pais | telefono | telefono2 | correo | parentesco | comunicacion_fk |
-|:---|:---|:---|:---|:---|:---|:---|:---|:---|:---|:---|:---|:---|:---|:---|:---|:---|:---|:---|:---|---:|
-| TI | Nombre1 | Apellido11 | Apellido21 | NIF | 11111111H | ABC123456 | 1980-01-01 | ESP | H | Dirección 1 | Complemento 1 | 18001 | NA | 18001 | ESP | 111111111 | 211111111 | <correo1@correo.es> | NA | 1 |
-| VI | Nombre2 | Apellido12 | Apellido22 | NIF | 22222222J | ABC123457 | 1980-01-02 | ESP | M | Dirección 2 | NA | 18002 | NA | 18002 | ESP | 222222222 | NA | <correo2@correo.es> | NA | 1 |
-| VI | Nombre3 | Apellido13 | Apellido23 | NIF | 33333333P | ABC123458 | 1980-01-03 | ESP | O | Dirección 3 | Complemento 3 | 18003 | NA | 18003 | ESP | 333333333 | 233333333 | <correo3@correo.es> | NA | 1 |
-| VI | Nombre4 | Apellido14 | Apellido24 | NIF | 44444444A | ABC123459 | 1980-01-04 | ESP | NA | Dirección 4 | NA | 18004 | NA | 18004 | ESP | 444444444 | NA | <correo4@correo.es> | NA | 1 |
+| rol | nombre | apellido1 | apellido2 | tipoDocumento | numeroDocumento | fechaNacimiento | nacionalidad | sexo | direccion | direccionComplementaria | codigoMunicipio | nombreMunicipio | codigoPostal | pais | telefono | telefono2 | correo | parentesco | comunicacion_fk |
+|:---|:---|:---|:---|:---|:---|:---|:---|:---|:---|:---|:---|:---|:---|:---|:---|:---|:---|:---|---:|
+| TI | Nombre1 | Apellido11 | Apellido21 | NIF | 11111111H | 1980-01-01 | ESP | H | Dirección 1 | Complemento 1 | 18001 | NA | 18001 | ESP | 111111111 | 211111111 | <correo1@correo.es> | NA | 1 |
+| VI | Nombre2 | Apellido12 | Apellido22 | NIF | 22222222J | 1980-01-02 | ESP | M | Dirección 2 | NA | 18002 | NA | 18002 | ESP | 222222222 | NA | <correo2@correo.es> | NA | 1 |
+| VI | Nombre3 | Apellido13 | Apellido23 | NIF | 33333333P | 1980-01-03 | ESP | O | Dirección 3 | Complemento 3 | 18003 | NA | 18003 | ESP | 333333333 | 233333333 | <correo3@correo.es> | NA | 1 |
+| VI | Nombre4 | Apellido14 | Apellido24 | NIF | 44444444A | 1980-01-04 | ESP | NA | Dirección 4 | NA | 18004 | NA | 18004 | ESP | 444444444 | NA | <correo4@correo.es> | NA | 1 |
 
 ### Validar el archivo
 
@@ -195,7 +195,6 @@ cat("```xml\n", paste(contenido, collapse = "\n"), "\n```", sep = "")
         <apellido2>Apellido21</apellido2>
         <tipoDocumento>NIF</tipoDocumento>
         <numeroDocumento>11111111H</numeroDocumento>
-        <soporteDocumento>ABC123456</soporteDocumento>
         <fechaNacimiento>1980-01-01</fechaNacimiento>
         <nacionalidad>ESP</nacionalidad>
         <sexo>H</sexo>
@@ -217,7 +216,6 @@ cat("```xml\n", paste(contenido, collapse = "\n"), "\n```", sep = "")
         <apellido2>Apellido22</apellido2>
         <tipoDocumento>NIF</tipoDocumento>
         <numeroDocumento>22222222J</numeroDocumento>
-        <soporteDocumento>ABC123457</soporteDocumento>
         <fechaNacimiento>1980-01-02</fechaNacimiento>
         <nacionalidad>ESP</nacionalidad>
         <sexo>M</sexo>
@@ -237,7 +235,6 @@ cat("```xml\n", paste(contenido, collapse = "\n"), "\n```", sep = "")
         <apellido2>Apellido23</apellido2>
         <tipoDocumento>NIF</tipoDocumento>
         <numeroDocumento>33333333P</numeroDocumento>
-        <soporteDocumento>ABC123458</soporteDocumento>
         <fechaNacimiento>1980-01-03</fechaNacimiento>
         <nacionalidad>ESP</nacionalidad>
         <sexo>O</sexo>
@@ -259,7 +256,6 @@ cat("```xml\n", paste(contenido, collapse = "\n"), "\n```", sep = "")
         <apellido2>Apellido24</apellido2>
         <tipoDocumento>NIF</tipoDocumento>
         <numeroDocumento>44444444A</numeroDocumento>
-        <soporteDocumento>ABC123459</soporteDocumento>
         <fechaNacimiento>1980-01-04</fechaNacimiento>
         <nacionalidad>ESP</nacionalidad>
         <direccion>

@@ -125,4 +125,3 @@ validar_hoja_calculo(achivo)
 
 generar_xml(achivo, "c:/datos/resultado.xml", optimizar = TRUE)
 ```
-
