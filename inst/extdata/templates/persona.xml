@@ -20,5 +20,4 @@
         <telefono>{telefono}</telefono>
         <telefono2>{telefono2}</telefono2>
         <correo>{correo}</correo>
-        <parentesco>{parentesco}</parentesco>
       </persona>

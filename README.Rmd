@@ -92,7 +92,7 @@ Para facilitar la corrección de errores, se muestran avisos de los problemas de
 
 ### Generar el archivo XML
 
-Cuando consideremos que el archivo está correcto, podemos generar el archivo XML mediante la función `generar_xml()`. Indicamos el nombre del archivo de nuestra hoja de cálculo y el nombre del archivo XML que queremos generar (p.e., `c:/datos/resultado.xml`), en este caso, para que se pueda ejecutar aquí, le pasamos también una ubicación temporal para el archivo resultado. Si indicamos el parámetro `optimizar = TRUE` elimina los nodos vacíos del archivo XML obtenido.
+Cuando consideremos que el archivo está correcto, podemos generar el archivo XML mediante la función `generar_xml()`. Indicamos el nombre del archivo de nuestra hoja de cálculo y el nombre del archivo XML que queremos generar (p.e., `c:/datos/resultado.xml`), en este caso, para que se pueda ejecutar aquí, le pasamos también una ubicación temporal para el archivo resultado. 
 
 ```{r}
 resultado_xml <- file.path(tempdir(), "resultado.xml")
@@ -123,5 +123,6 @@ achivo <- obtener_hoja_calculo("c:/datos/mis_datos.xlsx")
 
 validar_hoja_calculo(achivo)
 
-generar_xml(achivo, "c:/datos/resultado.xml", optimizar = TRUE)
+generar_xml(achivo, "c:/datos/resultado.xml")
 ```
+

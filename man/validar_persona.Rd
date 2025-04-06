@@ -24,10 +24,9 @@ Genera advertencias en caso de datos faltantes o incorrectos.
 - Asegura que al menos una persona tenga el rol de Titular (TI).
 - Si hay menores de edad, al menos un adulto debe tener informado su parentesco con ellos.
 - Valida la presencia de campos obligatorios como `nombre`, `apellido1` y `fechaNacimiento`.
-- Si la persona es mayor de edad, se verifica la existencia de `tipoDocumento` y `numeroDocumento`.
+- Verifica la existencia de `tipoDocumento` y `numeroDocumento`.
 - Comprueba que `tipoDocumento` tenga un valor válido de `tipo_documento$codigo`.
-- Si el `tipoDocumento` es "NIF", el campo `apellido2` es obligatorio.
-- Valida que `sexo`, `nacionalidad` y `parentesco` contengan valores válidos según las tablas de códigos.
+- Valida que `sexo`, `nacionalidad` contengan valores válidos según las tablas de códigos.
 - Se debe proporcionar al menos un dato de contacto: `telefono`, `telefono2` o `correo`.
 - Se realizan validaciones sobre dirección, teléfono, email y documento de identidad.
 }

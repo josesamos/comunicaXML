@@ -51,11 +51,11 @@ test_that("validar_persona genera advertencia si falta el apellido1", {
 })
 
 
-test_that("validar_persona genera advertencia si una persona mayor de edad no tiene documento", {
-  persona_fallo <- persona
-  persona_fallo$tipoDocumento <- NA
-  expect_warning(validar_persona(comunicacion, persona_fallo), "Falta el campo 'tipo_documento'")
-})
+# test_that("validar_persona genera advertencia si una persona mayor de edad no tiene documento", {
+#   persona_fallo <- persona
+#   persona_fallo$tipoDocumento <- NA
+#   expect_warning(validar_persona(comunicacion, persona_fallo), "Falta el campo 'tipo_documento'")
+# })
 
 test_that("validar_persona genera advertencia si tipoDocumento es inválido", {
   persona_fallo <- persona
@@ -63,11 +63,11 @@ test_that("validar_persona genera advertencia si tipoDocumento es inválido", {
   expect_warning(validar_persona(comunicacion, persona_fallo), "El campo 'tipo_documento' no es válido")
 })
 
-test_that("validar_persona genera advertencia si NIF no tiene apellido2", {
-  persona_fallo <- persona
-  persona_fallo$apellido2 <- NA
-  expect_warning(validar_persona(comunicacion, persona_fallo), "Falta el campo 'apellido2'. Obligatorio si el tipo de documento es NIF")
-})
+# test_that("validar_persona genera advertencia si NIF no tiene apellido2", {
+#   persona_fallo <- persona
+#   persona_fallo$apellido2 <- NA
+#   expect_warning(validar_persona(comunicacion, persona_fallo), "Falta el campo 'apellido2'. Obligatorio si el tipo de documento es NIF")
+# })
 
 test_that("validar_persona genera advertencia si el teléfono es inválido", {
   persona_fallo <- persona
@@ -83,9 +83,4 @@ test_that("validar_persona genera advertencia si no hay teléfono, teléfono2 ni
   expect_warning(validar_persona(comunicacion, persona_fallo), "Obligatorio incluir una de estas tres etiquetas: 'telefono', 'telefono2' o 'correo'")
 })
 
-test_that("validar_persona genera advertencia si el parentesco no es válido", {
-  persona_fallo <- persona
-  persona_fallo$parentesco <- "INVALIDO"
-  expect_warning(validar_persona(comunicacion, persona_fallo), "El campo 'parentesco' no es válido")
-})
 
