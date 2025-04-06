@@ -1,10 +1,10 @@
 test_that("generar_xml works", {
-  hoja_calculo <- system.file("extdata", "xml/partes_viajeros.xlsx", package = "comunicaXML")
+  hoja_calculo <- system.file("extdata", "alta_reserva_hospedaje.xlsx", package = "comunicaXML")
   archivo_xml <- tempfile(fileext = ".xml")
 
-  archivo <- generar_xml(hoja_calculo, archivo_xml, pdf = FALSE)
+  archivo <- generar_xml(hoja_calculo, archivo_xml)
 
-  original_xml <- system.file("extdata", "xml/partes_viajeros_generados.xml", package = "comunicaXML")
+  original_xml <- system.file("extdata", "test/alta_reserva_hospedaje_generada.xml", package = "comunicaXML")
 
   doc1 <- xml2::read_xml(original_xml)
   doc2 <- xml2::read_xml(archivo)
@@ -19,12 +19,12 @@ test_that("generar_xml works", {
 })
 
 test_that("generar_xml works", {
-  hoja_calculo <- system.file("extdata", "pdf/partes_viajeros.xlsx", package = "comunicaXML")
+  hoja_calculo <- system.file("extdata", "alta_reserva_hospedaje.xlsx", package = "comunicaXML")
   archivo_xml <- tempfile(fileext = ".xml")
 
   archivo <- generar_xml(hoja_calculo, archivo_xml)
 
-  original_xml <- system.file("extdata", "pdf/partes_viajeros_generados.xml", package = "comunicaXML")
+  original_xml <- system.file("extdata", "test/alta_reserva_hospedaje_generada.xml", package = "comunicaXML")
 
   doc1 <- xml2::read_xml(original_xml)
   doc2 <- xml2::read_xml(archivo)

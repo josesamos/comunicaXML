@@ -11,5 +11,4 @@
             <pais>{pais}</pais>
           </direccion>
         </datosEstablecimiento>
-        <codigo>{codigo}</codigo>
       </establecimiento>

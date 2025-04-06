@@ -24,8 +24,6 @@
 #'
 #' @keywords internal
 validar_persona <- function(comunicacion, persona) {
-  validate_fk(comunicacion, "comunicacion", persona, "persona")
-
   df <- persona
 
   for (k in comunicacion$comunicacion_pk) {

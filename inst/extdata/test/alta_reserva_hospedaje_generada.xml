@@ -1,8 +1,20 @@
 <ns2:peticion xmlns:ns2="http://www.neg.hospedajes.mir.es/altaReservaHospedaje">
   <solicitud>
-    <codigoEstablecimiento>A123456789</codigoEstablecimiento>
     <comunicacion>
-      <!--Comunicación nº 1-->
+      <!--Descripción de comunicación-->
+      <establecimiento>
+        <datosEstablecimiento>
+          <tipo>PARADOR</tipo>
+          <nombre>El Parador</nombre>
+          <direccion>
+            <direccion>Calle del Parador</direccion>
+            <direccionComplementaria>nº 3</direccionComplementaria>
+            <codigoMunicipio>18003</codigoMunicipio>
+            <codigoPostal>18003</codigoPostal>
+            <pais>ESP</pais>
+          </direccion>
+        </datosEstablecimiento>
+      </establecimiento>
       <contrato>
         <referencia>X123ABC</referencia>
         <fechaContrato>2025-02-20</fechaContrato>
@@ -35,14 +47,12 @@
           <direccion>Dirección 1</direccion>
           <direccionComplementaria>Complemento 1</direccionComplementaria>
           <codigoMunicipio>18001</codigoMunicipio>
-          <nombreMunicipio></nombreMunicipio>
           <codigoPostal>18001</codigoPostal>
           <pais>ESP</pais>
         </direccion>
         <telefono>111111111</telefono>
         <telefono2>211111111</telefono2>
         <correo>correo1@correo.es</correo>
-        <parentesco></parentesco>
       </persona>
 
       <persona>
@@ -58,16 +68,12 @@
         <sexo>M</sexo>
         <direccion>
           <direccion>Dirección 2</direccion>
-          <direccionComplementaria></direccionComplementaria>
           <codigoMunicipio>18002</codigoMunicipio>
-          <nombreMunicipio></nombreMunicipio>
           <codigoPostal>18002</codigoPostal>
           <pais>ESP</pais>
         </direccion>
         <telefono>222222222</telefono>
-        <telefono2></telefono2>
         <correo>correo2@correo.es</correo>
-        <parentesco></parentesco>
       </persona>
 
       <persona>
@@ -85,14 +91,12 @@
           <direccion>Dirección 3</direccion>
           <direccionComplementaria>Complemento 3</direccionComplementaria>
           <codigoMunicipio>18003</codigoMunicipio>
-          <nombreMunicipio></nombreMunicipio>
           <codigoPostal>18003</codigoPostal>
           <pais>ESP</pais>
         </direccion>
         <telefono>333333333</telefono>
         <telefono2>233333333</telefono2>
         <correo>correo3@correo.es</correo>
-        <parentesco></parentesco>
       </persona>
 
       <persona>
@@ -105,19 +109,14 @@
         <soporteDocumento>ABC123459</soporteDocumento>
         <fechaNacimiento>1980-01-04</fechaNacimiento>
         <nacionalidad>ESP</nacionalidad>
-        <sexo></sexo>
         <direccion>
           <direccion>Dirección 4</direccion>
-          <direccionComplementaria></direccionComplementaria>
           <codigoMunicipio>18004</codigoMunicipio>
-          <nombreMunicipio></nombreMunicipio>
           <codigoPostal>18004</codigoPostal>
           <pais>ESP</pais>
         </direccion>
         <telefono>444444444</telefono>
-        <telefono2></telefono2>
         <correo>correo4@correo.es</correo>
-        <parentesco></parentesco>
       </persona>
     </comunicacion>
   </solicitud>

@@ -26,7 +26,6 @@ Debe contener los campos necesarios:
 \description{
 Comprueba si los datos del establecimiento proporcionados están estructurados correctamente y son coherentes.
 Comprueba que:
-: la clave externa de establecimiento existe en la tabla de comunicación.
 : los campos obligatorios se completan según el país.
 : la información del municipio está especificada correctamente según el país.
 : se proporciona un código de establecimiento válido o detalles completos del establecimiento, pero no ambos.

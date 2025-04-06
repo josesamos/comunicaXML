@@ -54,17 +54,17 @@ achivo <- obtener_hoja_calculo(mis_datos)
 A continuación se muestra el contenido de las hojas del archivo
 obtenido.
 
-#### Hoja: solicitud
-
-| solicitud_pk | codigoEstablecimiento |
-|:-------------|:----------------------|
-| 1            | NA                    |
-
 #### Hoja: comunicacion
 
-| comunicacion_pk | comentario        | solicitud_fk |
-|----------------:|:------------------|:-------------|
-|               1 | Comunicación nº 1 | 1            |
+| comunicacion_pk | descripcion                 |
+|----------------:|:----------------------------|
+|               1 | Descripción de comunicación |
+
+#### Hoja: establecimiento
+
+| tipo | nombre | direccion | direccionComplementaria | codigoMunicipio | nombreMunicipio | codigoPostal | pais | comunicacion_fk |
+|:---|:---|:---|:---|:---|:---|:---|:---|---:|
+| NA | NA | NA | NA | NA | NA | NA | NA | 1 |
 
 #### Hoja: contrato
 
@@ -86,17 +86,17 @@ Las hojas están relacionadas mediante los campos con los sufijos `_pk` y
 Completamos las hojas de la plantilla con nuestros datos. A continuación
 se muestran unos datos de ejemplo.
 
-#### Hoja: solicitud
-
-| solicitud_pk | codigoEstablecimiento |
-|:-------------|:----------------------|
-| 1            | A123456789            |
-
 #### Hoja: comunicacion
 
-| comunicacion_pk | comentario        | solicitud_fk |
-|----------------:|:------------------|:-------------|
-|               1 | Comunicación nº 1 | 1            |
+| comunicacion_pk | descripcion                 |
+|----------------:|:----------------------------|
+|               1 | Descripción de comunicación |
+
+#### Hoja: establecimiento
+
+| tipo | nombre | direccion | direccionComplementaria | codigoMunicipio | nombreMunicipio | codigoPostal | pais | comunicacion_fk |
+|:---|:---|:---|:---|:---|:---|:---|:---|---:|
+| PARADOR | El Parador | Calle del Parador | nº 3 | 18003 | NA | 18003 | ESP | 1 |
 
 #### Hoja: contrato
 
@@ -142,7 +142,7 @@ elimina los nodos vacíos del archivo XML obtenido.
 ``` r
 resultado_xml <- file.path(tempdir(), "resultado.xml")
 
-archivo_2 <- generar_xml(achivo, resultado_xml, optimizar = TRUE)
+archivo_2 <- generar_xml(achivo, resultado_xml)
 ```
 
 A continuación se muestra el contenido del archivo que hemos obtenido.
@@ -157,9 +157,21 @@ cat("```xml\n", paste(contenido, collapse = "\n"), "\n```", sep = "")
 <?xml version="1.0" encoding="UTF-8"?>
 <ns2:peticion xmlns:ns2="http://www.neg.hospedajes.mir.es/altaReservaHospedaje">
   <solicitud>
-    <codigoEstablecimiento>A123456789</codigoEstablecimiento>
     <comunicacion>
-      <!--Comunicación nº 1-->
+      <!--Descripción de comunicación-->
+      <establecimiento>
+        <datosEstablecimiento>
+          <tipo>PARADOR</tipo>
+          <nombre>El Parador</nombre>
+          <direccion>
+            <direccion>Calle del Parador</direccion>
+            <direccionComplementaria>nº 3</direccionComplementaria>
+            <codigoMunicipio>18003</codigoMunicipio>
+            <codigoPostal>18003</codigoPostal>
+            <pais>ESP</pais>
+          </direccion>
+        </datosEstablecimiento>
+      </establecimiento>
       <contrato>
         <referencia>X123ABC</referencia>
         <fechaContrato>2025-02-20</fechaContrato>

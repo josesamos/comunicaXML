@@ -70,7 +70,7 @@ Las hojas están relacionadas mediante los campos con los sufijos `_pk` y `_fk`.
 Completamos las hojas de la plantilla con nuestros datos. A continuación se muestran unos datos de ejemplo.
 
 ```{r, echo=FALSE, results='asis'}
-achivo <- system.file("extdata", "pdf/partes_viajeros.xlsx", package = "comunicaXML")
+achivo <- system.file("extdata", "alta_reserva_hospedaje.xlsx", package = "comunicaXML")
 
 hojas <- readxl::excel_sheets(achivo)
 for (hoja in hojas) {
@@ -97,7 +97,7 @@ Cuando consideremos que el archivo está correcto, podemos generar el archivo XM
 ```{r}
 resultado_xml <- file.path(tempdir(), "resultado.xml")
 
-archivo_2 <- generar_xml(achivo, resultado_xml, optimizar = TRUE)
+archivo_2 <- generar_xml(achivo, resultado_xml)
 ```
 
 A continuación se muestra el contenido del archivo que hemos obtenido.

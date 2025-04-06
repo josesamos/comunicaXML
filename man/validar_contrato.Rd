@@ -15,13 +15,12 @@ validar_contrato(comunicacion, contrato)
 Devuelve `TRUE` si no se encuentran errores. En caso de valores inválidos, muestra advertencias.
 }
 \description{
-Verifica que los datos de un contrato sean válidos, comprobando la existencia
-de claves foráneas, el formato correcto de fechas, la coherencia de fechas de entrada y salida,
-y la validez de otros campos como número de personas, número de habitaciones, tipo de pago e internet.
+Verifica que los datos de un contrato sean válidos, el formato correcto de fechas,
+la coherencia de fechas de entrada y salida, y la validez de otros campos como número
+de personas, número de habitaciones, tipo de pago e internet.
 }
 \details{
 La validación incluye:
-- Clave foránea: Se verifica que la clave de contrato en `contrato` existe en `comunicacion`.
 - `referencia`: Debe estar presente.
 - `fechaContrato`: Debe cumplir con el formato de fecha `AAAA-MM-DD`.
 - `fechaEntrada` y `fechaSalida`: Deben cumplir con el formato `AAAA-MM-DDThh:mm:ss` y la fecha de salida debe ser posterior a la de entrada.

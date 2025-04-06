@@ -4,24 +4,9 @@ test_that("validar_establecimiento maneja correctamente los diferentes casos", {
   # Datos de comunicación válidos
   comunicacion <- data.frame(comunicacion_pk = c(1, 2, 3))
 
-  # Caso 1: Establecimiento con código válido (debe pasar sin warnings)
-  establecimiento_valido <- data.frame(
-    comunicacion_fk = 1,
-    codigo = c("EST001"),
-    tipo = NA,
-    nombre = NA,
-    pais = NA,
-    codigoMunicipio = NA,
-    nombreMunicipio = NA,
-    codigoPostal = NA,
-    direccion = NA
-  )
-  expect_silent(validar_establecimiento(comunicacion, establecimiento_valido))
-
   # Caso 2: Establecimiento sin código, pero con tipo y nombre válidos
   establecimiento_con_datos <- data.frame(
     comunicacion_fk = 1,
-    codigo = NA,
     tipo = "HOTEL",
     nombre = "Hotel Ejemplo",
     pais = "ESP",
@@ -55,11 +40,5 @@ test_that("validar_establecimiento maneja correctamente los diferentes casos", {
   establecimiento_direccion_incompleta$codigoPostal <- NA
   expect_warning(validar_establecimiento(comunicacion, establecimiento_direccion_incompleta),
                  "Falta el campo 'codigoPostal'")
-
-  # Caso 7: Código de establecimiento informado junto con otros datos (error)
-  establecimiento_con_codigo_y_datos <- establecimiento_con_datos
-  establecimiento_con_codigo_y_datos$codigo <- "EST001"
-  expect_warning(validar_establecimiento(comunicacion, establecimiento_con_codigo_y_datos),
-                 "Ha de indicar los datos del establecimiento o bien el código de establecimiento.")
 
 })

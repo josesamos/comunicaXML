@@ -20,33 +20,22 @@
 #' @param hoja_calculo Carácter. Ruta al archivo de hoja de cálculo que se va a procesar.
 #' @param archivo_xml Carácter (opcional). Ruta del archivo XML de salida. Si es NULO,
 #' el archivo XML tendrá el mismo nombre y ubicación que el archivo de hoja de cálculo.
-#' @param pdf Booleano. Sigue el modelo del archivo pdf o del ejemplo xml.
-#' @param optimizar Booleano. Elimina los nodos vacíos del archivo xml.
 #'
 #' @return Carácter. La ruta del archivo del documento XML generado.
 #'
 #' @examples
-#' hoja_calculo <- system.file("extdata", "pdf/partes_viajeros.xlsx", package = "comunicaXML")
+#' hoja_calculo <- system.file("extdata", "alta_reserva_hospedaje.xlsx", package = "comunicaXML")
 #' archivo_xml <- tempfile(fileext = ".xml")
 #'
 #' archivo <- generar_xml(hoja_calculo, archivo_xml)
 #'
 #' @export
-generar_xml <- function(hoja_calculo, archivo_xml = NULL, pdf = TRUE, optimizar = FALSE) {
-  if (pdf) {
-    plantilla <- "pdf/templates/partes_viajeros.xml"
-  }else {
-    plantilla <- "xml/templates/partes_viajeros.xml"
-  }
-
-  file <- tab2xml::sheet2xml(hoja_calculo,
-                     system.file("extdata", plantilla, package = "comunicaXML"),
-                     archivo_xml)
-
-  if (optimizar) {
-    contenido <- xml2::read_xml(file)
-    remove_empty_nodes(contenido)
-    xml2::write_xml(contenido, file)
-  }
+generar_xml <- function(hoja_calculo, archivo_xml = NULL) {
+  file <- tab2xml::sheet2xml(
+    hoja_calculo,
+    system.file("extdata", "templates/alta_reserva_hospedaje.xml", package = "comunicaXML"),
+    archivo_xml,
+    optimize = TRUE
+  )
   file
 }

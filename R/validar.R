@@ -7,48 +7,35 @@
 #' con los requisitos de validación.
 #'
 #' @param hoja_calculo Ruta al archivo de hoja de cálculo en formato `.xlsx` o `.ods`.
-#' @param pdf Booleano. Sigue el modelo del archivo pdf o del ejemplo xml.
 #'
 #' @return Devuelve `TRUE` si la validación se completa sin errores. En caso de problemas,
 #'         se generan errores (`stop`) o advertencias (`warning`).
 #'
 #' @examples
-#' hoja_calculo <- system.file("extdata", "pdf/partes_viajeros.xlsx", package = "comunicaXML")
+#' hoja_calculo <- system.file("extdata", "alta_reserva_hospedaje.xlsx", package = "comunicaXML")
 #'
 #' res <- validar_hoja_calculo(hoja_calculo)
 #'
 #' @export
-validar_hoja_calculo<- function(hoja_calculo, pdf = TRUE) {
-  if (!file.exists(hoja_calculo)) {
-    stop("El archivo no existe: ", hoja_calculo)
-  }
+validar_hoja_calculo<- function(hoja_calculo) {
+
+  template_path <- system.file("extdata", "templates/alta_reserva_hospedaje.xml", package = "comunicaXML")
+  tab2xml::check_tab(file_path = hoja_calculo, template_path = NULL)
 
   extension <- tools::file_ext(hoja_calculo)
   sheets_data <- list()
-
   if (extension == "xlsx") {
     sheet_names <- readxl::excel_sheets(hoja_calculo)
     sheets_data <- lapply(sheet_names, function(sheet)
       readxl::read_excel(hoja_calculo, sheet = sheet, col_types = "text"))
-
   } else if (extension == "ods") {
     sheet_names <- readODS::ods_sheets(hoja_calculo)
     sheets_data <- lapply(seq_along(sheet_names), function(sheet)
       readODS::read_ods(hoja_calculo, sheet = sheet, col_types = NA))
-
-  } else {
-    stop("Formato no compatible. Utilice un archivo .xlsx o .ods.")
   }
   names(sheets_data) <- tolower(sheet_names)
 
-  validate_pk(sheets_data$comunicacion, "comunicacion")
-  if (pdf) {
-    validate_pk(sheets_data$solicitud, "solicitud")
-    validar_solicitud(sheets_data$solicitud)
-    validate_fk(sheets_data$solicitud, "solicitud", sheets_data$comunicacion, "comunicacion")
-  } else {
-    validar_establecimiento(sheets_data$comunicacion, sheets_data$establecimiento)
-  }
+  validar_establecimiento(sheets_data$comunicacion, sheets_data$establecimiento)
 
   validar_contrato(sheets_data$comunicacion, sheets_data$contrato)
 

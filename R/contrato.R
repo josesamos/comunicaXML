@@ -1,15 +1,14 @@
 #' Validar los datos de un contrato
 #'
-#' Verifica que los datos de un contrato sean válidos, comprobando la existencia
-#' de claves foráneas, el formato correcto de fechas, la coherencia de fechas de entrada y salida,
-#' y la validez de otros campos como número de personas, número de habitaciones, tipo de pago e internet.
+#' Verifica que los datos de un contrato sean válidos, el formato correcto de fechas,
+#' la coherencia de fechas de entrada y salida, y la validez de otros campos como número
+#' de personas, número de habitaciones, tipo de pago e internet.
 #'
 #' @param comunicacion Un `data.frame` que contiene las claves primarias de comunicación.
 #' @param contrato Un `data.frame` con la información de los contratos a validar.
 #'
 #' @details
 #' La validación incluye:
-#' - Clave foránea: Se verifica que la clave de contrato en `contrato` existe en `comunicacion`.
 #' - `referencia`: Debe estar presente.
 #' - `fechaContrato`: Debe cumplir con el formato de fecha `AAAA-MM-DD`.
 #' - `fechaEntrada` y `fechaSalida`: Deben cumplir con el formato `AAAA-MM-DDThh:mm:ss` y la fecha de salida debe ser posterior a la de entrada.
@@ -26,8 +25,6 @@
 #'
 #' @keywords internal
 validar_contrato <- function(comunicacion, contrato) {
-  validate_fk(comunicacion, "comunicacion", contrato, "contrato")
-
   df <- contrato
 
   for (i in 1:nrow(df)) {

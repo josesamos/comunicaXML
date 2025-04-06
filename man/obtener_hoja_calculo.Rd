@@ -4,13 +4,11 @@
 \alias{obtener_hoja_calculo}
 \title{Obtener una hoja de cálculo predefinida}
 \usage{
-obtener_hoja_calculo(archivo, pdf = TRUE)
+obtener_hoja_calculo(archivo)
 }
 \arguments{
 \item{archivo}{Ruta del archivo de destino donde se copiará la hoja de cálculo.
 Debe incluir la extensión `.xlsx` o `.ods`.}
-
-\item{pdf}{Booleano. Sigue el modelo del archivo pdf o del ejemplo xml.}
 }
 \value{
 Devuelve el nombre del archivo.

@@ -2,7 +2,6 @@
 #'
 #' Comprueba si los datos del establecimiento proporcionados están estructurados correctamente y son coherentes.
 #' Comprueba que:
-#': la clave externa de establecimiento existe en la tabla de comunicación.
 #': los campos obligatorios se completan según el país.
 #': la información del municipio está especificada correctamente según el país.
 #': se proporciona un código de establecimiento válido o detalles completos del establecimiento, pero no ambos.
@@ -23,40 +22,28 @@
 #'
 #' @keywords internal
 validar_establecimiento <- function(comunicacion, establecimiento) {
-  validate_fk(comunicacion, "comunicacion", establecimiento, "establecimiento")
-
   df <- establecimiento
 
   for (i in 1:nrow(df)) {
     ubicacion <- sprintf('establecimiento (fila %d)', i)
     resto_instanciado  <- sum(!is_cell_empty(df[i, ]))
-    if (is_cell_empty(df$codigo[i])) {
-      if (is_cell_empty(df$tipo[i])) {
-        warning(ubicacion,
-                " -> Falta el campo 'tipo'. Consulta los c\u00f3digos mediante 'View(tipo_establecimiento)'."
-        )
-      } else {
-        if (!(df$tipo[i] %in% tipo_establecimiento$codigo)) {
-          warning(
-            ubicacion,
-            " -> El campo 'tipo' no es v\u00e1lido. Consulta los c\u00f3digos mediante 'View(tipo_establecimiento)'."
-          )
-        }
-      }
-      if (is_cell_empty(df$nombre[i])) {
-        warning(ubicacion,
-                " -> Falta el campo 'nombre'."
-        )
-      }
-      validar_direccion(df[i, ], ubicacion)
+    if (is_cell_empty(df$tipo[i])) {
+      warning(
+        ubicacion,
+        " -> Falta el campo 'tipo'. Consulta los c\u00f3digos mediante 'View(tipo_establecimiento)'."
+      )
     } else {
-      if (resto_instanciado > 2) {
+      if (!(df$tipo[i] %in% tipo_establecimiento$codigo)) {
         warning(
           ubicacion,
-          " -> Ha de indicar los datos del establecimiento o bien el c\u00f3digo de establecimiento."
+          " -> El campo 'tipo' no es v\u00e1lido. Consulta los c\u00f3digos mediante 'View(tipo_establecimiento)'."
         )
       }
     }
+    if (is_cell_empty(df$nombre[i])) {
+      warning(ubicacion, " -> Falta el campo 'nombre'.")
+    }
+    validar_direccion(df[i, ], ubicacion)
   }
   TRUE
 }
