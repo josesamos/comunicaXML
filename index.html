@@ -191,28 +191,27 @@
 <div class="section level4">
 <h4 id="hoja-persona">Hoja: persona<a class="anchor" aria-label="anchor" href="#hoja-persona"></a>
 </h4>
-<table class="table">
+<table style="width:100%;" class="table">
 <colgroup>
-<col width="4%">
-<col width="4%">
-<col width="4%">
-<col width="4%">
-<col width="4%">
-<col width="4%">
-<col width="4%">
-<col width="4%">
-<col width="4%">
-<col width="4%">
-<col width="4%">
-<col width="4%">
-<col width="4%">
-<col width="4%">
-<col width="4%">
-<col width="4%">
-<col width="4%">
-<col width="4%">
-<col width="4%">
-<col width="4%">
+<col width="5%">
+<col width="5%">
+<col width="5%">
+<col width="5%">
+<col width="5%">
+<col width="5%">
+<col width="5%">
+<col width="5%">
+<col width="5%">
+<col width="5%">
+<col width="5%">
+<col width="5%">
+<col width="5%">
+<col width="5%">
+<col width="5%">
+<col width="5%">
+<col width="5%">
+<col width="5%">
+<col width="5%">
 </colgroup>
 <thead><tr class="header">
 <th align="left">rol</th>
@@ -233,12 +232,10 @@
 <th align="left">telefono</th>
 <th align="left">telefono2</th>
 <th align="left">correo</th>
-<th align="left">parentesco</th>
 <th align="right">comunicacion_fk</th>
 </tr></thead>
 <tbody><tr class="odd">
-<td align="left">NA</td>
-<td align="left">NA</td>
+<td align="left">TI</td>
 <td align="left">NA</td>
 <td align="left">NA</td>
 <td align="left">NA</td>
@@ -373,28 +370,27 @@
 <div class="section level4">
 <h4 id="hoja-persona-1">Hoja: persona<a class="anchor" aria-label="anchor" href="#hoja-persona-1"></a>
 </h4>
-<table class="table">
+<table style="width:100%;" class="table">
 <colgroup>
-<col width="4%">
-<col width="4%">
-<col width="4%">
-<col width="4%">
-<col width="4%">
-<col width="4%">
-<col width="4%">
-<col width="4%">
-<col width="4%">
-<col width="4%">
-<col width="4%">
-<col width="4%">
-<col width="4%">
-<col width="4%">
-<col width="4%">
-<col width="4%">
-<col width="4%">
-<col width="4%">
-<col width="4%">
-<col width="4%">
+<col width="5%">
+<col width="5%">
+<col width="5%">
+<col width="5%">
+<col width="5%">
+<col width="5%">
+<col width="5%">
+<col width="5%">
+<col width="5%">
+<col width="5%">
+<col width="5%">
+<col width="5%">
+<col width="5%">
+<col width="5%">
+<col width="5%">
+<col width="5%">
+<col width="5%">
+<col width="5%">
+<col width="5%">
 </colgroup>
 <thead><tr class="header">
 <th align="left">rol</th>
@@ -415,7 +411,6 @@
 <th align="left">telefono</th>
 <th align="left">telefono2</th>
 <th align="left">correo</th>
-<th align="left">parentesco</th>
 <th align="right">comunicacion_fk</th>
 </tr></thead>
 <tbody>
@@ -438,7 +433,6 @@
 <td align="left">111111111</td>
 <td align="left">211111111</td>
 <td align="left"><a href="mailto:correo1@correo.es" class="email">correo1@correo.es</a></td>
-<td align="left">NA</td>
 <td align="right">1</td>
 </tr>
 <tr class="even">
@@ -460,7 +454,6 @@
 <td align="left">222222222</td>
 <td align="left">NA</td>
 <td align="left"><a href="mailto:correo2@correo.es" class="email">correo2@correo.es</a></td>
-<td align="left">NA</td>
 <td align="right">1</td>
 </tr>
 <tr class="odd">
@@ -482,7 +475,6 @@
 <td align="left">333333333</td>
 <td align="left">233333333</td>
 <td align="left"><a href="mailto:correo3@correo.es" class="email">correo3@correo.es</a></td>
-<td align="left">NA</td>
 <td align="right">1</td>
 </tr>
 <tr class="even">
@@ -504,7 +496,6 @@
 <td align="left">444444444</td>
 <td align="left">NA</td>
 <td align="left"><a href="mailto:correo4@correo.es" class="email">correo4@correo.es</a></td>
-<td align="left">NA</td>
 <td align="right">1</td>
 </tr>
 </tbody>
@@ -523,7 +514,7 @@
 <div class="section level3">
 <h3 id="generar-el-archivo-xml">Generar el archivo XML<a class="anchor" aria-label="anchor" href="#generar-el-archivo-xml"></a>
 </h3>
-<p>Cuando consideremos que el archivo está correcto, podemos generar el archivo XML mediante la función <code><a href="reference/generar_xml.html">generar_xml()</a></code>. Indicamos el nombre del archivo de nuestra hoja de cálculo y el nombre del archivo XML que queremos generar (p.e., <code>c:/datos/resultado.xml</code>), en este caso, para que se pueda ejecutar aquí, le pasamos también una ubicación temporal para el archivo resultado. Si indicamos el parámetro <code>optimizar = TRUE</code> elimina los nodos vacíos del archivo XML obtenido.</p>
+<p>Cuando consideremos que el archivo está correcto, podemos generar el archivo XML mediante la función <code><a href="reference/generar_xml.html">generar_xml()</a></code>. Indicamos el nombre del archivo de nuestra hoja de cálculo y el nombre del archivo XML que queremos generar (p.e., <code>c:/datos/resultado.xml</code>), en este caso, para que se pueda ejecutar aquí, le pasamos también una ubicación temporal para el archivo resultado.</p>
 <div class="sourceCode" id="cb4"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">resultado_xml</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/file.path.html" class="external-link">file.path</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/tempfile.html" class="external-link">tempdir</a></span><span class="op">(</span><span class="op">)</span>, <span class="st">"resultado.xml"</span><span class="op">)</span></span>
 <span></span>
@@ -665,7 +656,7 @@
 <span></span>
 <span><span class="fu"><a href="reference/validar_hoja_calculo.html">validar_hoja_calculo</a></span><span class="op">(</span><span class="va">achivo</span><span class="op">)</span></span>
 <span></span>
-<span><span class="fu"><a href="reference/generar_xml.html">generar_xml</a></span><span class="op">(</span><span class="va">achivo</span>, <span class="st">"c:/datos/resultado.xml"</span>, optimizar <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span></code></pre></div>
+<span><span class="fu"><a href="reference/generar_xml.html">generar_xml</a></span><span class="op">(</span><span class="va">achivo</span>, <span class="st">"c:/datos/resultado.xml"</span><span class="op">)</span></span></code></pre></div>
 </div>
 </div>
   </main><aside class="col-md-3"><div class="license">
