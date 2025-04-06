@@ -14,7 +14,6 @@ persona <- structure(
     apellido2 = "Apellido21",
     tipoDocumento = "NIF",
     numeroDocumento = "11111111H",
-    soporteDocumento = "ABC123456",
     fechaNacimiento = "1980-01-01",
     nacionalidad = "ESP",
     sexo = "H",
@@ -68,12 +67,6 @@ test_that("validar_persona genera advertencia si NIF no tiene apellido2", {
   persona_fallo <- persona
   persona_fallo$apellido2 <- NA
   expect_warning(validar_persona(comunicacion, persona_fallo), "Falta el campo 'apellido2'. Obligatorio si el tipo de documento es NIF")
-})
-
-test_that("validar_persona genera advertencia si falta soporteDocumento para NIF/NIE", {
-  persona_fallo <- persona
-  persona_fallo$soporteDocumento <- NA
-  expect_warning(validar_persona(comunicacion, persona_fallo), "Falta el campo 'soporteDocumento'. Obligatorio si el tipo de documento es NIF o NIE")
 })
 
 test_that("validar_persona genera advertencia si el teléfono es inválido", {

@@ -15,7 +15,6 @@
 #' - Si la persona es mayor de edad, se verifica la existencia de `tipoDocumento` y `numeroDocumento`.
 #' - Comprueba que `tipoDocumento` tenga un valor válido de `tipo_documento$codigo`.
 #' - Si el `tipoDocumento` es "NIF", el campo `apellido2` es obligatorio.
-#' - Si el `tipoDocumento` es "NIF" o "NIE", el campo `soporteDocumento` debe existir y tener 9 caracteres alfanuméricos.
 #' - Valida que `sexo`, `nacionalidad` y `parentesco` contengan valores válidos según las tablas de códigos.
 #' - Se debe proporcionar al menos un dato de contacto: `telefono`, `telefono2` o `correo`.
 #' - Se realizan validaciones sobre dirección, teléfono, email y documento de identidad.
@@ -98,13 +97,6 @@ validar_persona <- function(comunicacion, persona) {
         }
       }
       if (df$tipoDocumento[i] %in% c('NIF', 'NIE')) {
-        if (is_cell_empty(df$soporteDocumento[i])) {
-          warning(ubicacion,
-                  " -> Falta el campo 'soporteDocumento'. Obligatorio si el tipo de documento es NIF o NIE.")
-        } else if (!grepl("^[A-Za-z0-9]{9}$", df$soporteDocumento[i])) {
-          warning(ubicacion,
-                  " -> El campo 'soporteDocumento' debe contener exactamente 9 caracteres alfanum\u00e9ricos.")
-        }
         validar_nif_nie(df$numeroDocumento[i], ubicacion)
       }
     }

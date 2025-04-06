@@ -39,7 +39,6 @@
         <apellido2>Apellido21</apellido2>
         <tipoDocumento>NIF</tipoDocumento>
         <numeroDocumento>11111111H</numeroDocumento>
-        <soporteDocumento>ABC123456</soporteDocumento>
         <fechaNacimiento>1980-01-01</fechaNacimiento>
         <nacionalidad>ESP</nacionalidad>
         <sexo>H</sexo>
@@ -62,7 +61,6 @@
         <apellido2>Apellido22</apellido2>
         <tipoDocumento>NIF</tipoDocumento>
         <numeroDocumento>22222222J</numeroDocumento>
-        <soporteDocumento>ABC123457</soporteDocumento>
         <fechaNacimiento>1980-01-02</fechaNacimiento>
         <nacionalidad>ESP</nacionalidad>
         <sexo>M</sexo>
@@ -83,7 +81,6 @@
         <apellido2>Apellido23</apellido2>
         <tipoDocumento>NIF</tipoDocumento>
         <numeroDocumento>33333333P</numeroDocumento>
-        <soporteDocumento>ABC123458</soporteDocumento>
         <fechaNacimiento>1980-01-03</fechaNacimiento>
         <nacionalidad>ESP</nacionalidad>
         <sexo>O</sexo>
@@ -106,7 +103,6 @@
         <apellido2>Apellido24</apellido2>
         <tipoDocumento>NIF</tipoDocumento>
         <numeroDocumento>44444444A</numeroDocumento>
-        <soporteDocumento>ABC123459</soporteDocumento>
         <fechaNacimiento>1980-01-04</fechaNacimiento>
         <nacionalidad>ESP</nacionalidad>
         <direccion>
