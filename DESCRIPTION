@@ -15,9 +15,13 @@ URL: https://josesamos.github.io/comunicaXML/
 Depends: 
     R (>= 3.5)
 Imports: 
+    dplyr,
+    openxlsx,
     readODS,
     readxl,
-    tab2xml
+    stringr,
+    tab2xml,
+    utils
 Suggests: 
     testthat (>= 3.0.0),
     xml2
